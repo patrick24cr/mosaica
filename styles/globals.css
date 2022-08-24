@@ -1,4 +1,6 @@
 @import 'bootstrap/dist/css/bootstrap.css';
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee&family=Comfortaa&display=swap');
 
 html,
 body {
@@ -18,5 +20,27 @@ a {
 }
 
 body {
-  background-color: #88effd;
+  background-color: #1c154a;
+  color: white;
+  font-family: 'Comfortaa', cursive;
+  /* font-family: 'ABeeZee', sans-serif; */
+}
+
+.container1 {
+  padding: 30px;
+  background-color: #1c154a;
+}
+
+.container2 {
+  padding: 30px;
+  background-color: #1c154a;
+}
+
+.gridWrapper {
+  display: grid;
+  grid-template-columns: repeat(5, 2fr);
+}
+
+.gridWrapper > div {
+  height: 100px;
 }
