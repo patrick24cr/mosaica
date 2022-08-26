@@ -3,57 +3,51 @@
 
 function Home() {
   // const { user } = useAuth();
-  const grid = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
-  const colorPalette = {
-    five: '#FA1CFF',
-    four: '#B91BF0',
-    three: '#7B23D2',
-    two: '#43189F',
-    one: '#2D0582',
-  };
+  const width = ['a', 'b', 'c', 'd', 'e'];
+  const height = ['1', '2', '3', '4', '5'];
+  const calculatedTileNames = [];
+  for (let y = 0; y < height.length; y++) {
+    for (let x = 0; x < width.length; x++) {
+      calculatedTileNames.push(`${width[x]}${height[y]}`);
+    }
+  }
+  const colorPaletteArray = ['#210360', '#2D0582', '#411899', '#621BBB', '#7B23D2', '#9C15DB', '#DF1EF0', '#FA1CFF'];
   const colorAssociations = {
-    0: colorPalette.five,
-    1: colorPalette.four,
-    2: colorPalette.five,
-    3: colorPalette.four,
-    4: colorPalette.four,
-    5: colorPalette.five,
-    6: colorPalette.four,
-    7: colorPalette.three,
-    8: colorPalette.three,
-    9: colorPalette.four,
-    10: colorPalette.three,
-    11: colorPalette.three,
-    12: colorPalette.two,
-    13: colorPalette.two,
-    14: colorPalette.two,
-    15: colorPalette.four,
-    16: colorPalette.four,
-    17: colorPalette.three,
-    18: colorPalette.three,
-    19: colorPalette.one,
-    20: colorPalette.five,
-    21: colorPalette.four,
-    22: colorPalette.three,
-    23: colorPalette.two,
-    24: colorPalette.one,
+    a1: 7,
+    a2: 6,
+    a3: 5,
+    a4: 4,
+    a5: 3,
+    a6: 2,
+    a7: 1,
+    b1: 5,
+    b2: 4,
+    b3: 3,
+    b4: 3,
+    b5: 4,
+    c1: 3,
+    c2: 3,
+    c3: 2,
+    c4: 2,
+    c5: 2,
+    d1: 4,
+    d2: 4,
+    d3: 3,
+    d4: 3,
+    d5: 1,
+    e1: 5,
+    e2: 4,
+    e3: 3,
+    e4: 2,
+    e5: 1,
   };
 
   return (
     <div className="container1">
       <h1>Mosaica</h1>
-      <div
-        className="container2"
-        // className="text-center d-flex flex-column justify-content-center align-content-center"
-        // style={{
-        //   height: '90vh',
-        //   padding: '30px',
-        //   maxWidth: '400px',
-        //   margin: '0 auto',
-        // }}
-      >
-        <div className="gridWrapper">
-          {grid.map((tile) => <div key={`tile${tile}`} className={`tile${tile}`} style={{ backgroundColor: `${colorAssociations[tile]}` }} />)}
+      <div className="container2">
+        <div className="gridWrapper" style={{ gridTemplateColumns: `repeat(${height.length}, 2fr)` }}>
+          {calculatedTileNames.map((tile) => <div key={`tile${tile}`} id={`tile${tile}`} className={`grade${colorAssociations[tile]}`} style={{ backgroundColor: `${colorAssociations[tile] ? colorPaletteArray[colorAssociations[tile]] : colorPaletteArray[0]}` }} />)}
         </div>
         {/* <button className="btn btn-danger btn-lg copy-btn" type="button" onClick={signOut}>
           Sign Out
