@@ -3,8 +3,8 @@
 
 function Home() {
   // const { user } = useAuth();
-  const width = ['a', 'b', 'c', 'd', 'e'];
-  const height = ['1', '2', '3', '4', '5'];
+  const width = ['a', 'b', 'c', 'd', 'e', 'f'];
+  const height = ['1', '2', '3', '4', '5', '6'];
   const calculatedTileNames = [];
   for (let y = 0; y < height.length; y++) {
     for (let x = 0; x < width.length; x++) {
@@ -47,7 +47,13 @@ function Home() {
       <h1>Mosaica</h1>
       <div className="container2">
         <div className="gridWrapper" style={{ gridTemplateColumns: `repeat(${height.length}, 2fr)` }}>
-          {calculatedTileNames.map((tile) => <div key={`tile${tile}`} id={`tile${tile}`} className={`grade${colorAssociations[tile]}`} style={{ backgroundColor: `${colorAssociations[tile] ? colorPaletteArray[colorAssociations[tile]] : colorPaletteArray[0]}` }} />)}
+          {calculatedTileNames.map((tile) => (
+            <div key={`tile${tile}`} id={`tile${tile}`} className={`grade${colorAssociations[tile]}`} style={{ backgroundColor: `${colorAssociations[tile] ? colorPaletteArray[colorAssociations[tile]] : colorPaletteArray[0]}` }}>
+              <div className="hoverContainer">
+                {colorAssociations[tile] ? colorAssociations[tile] : 0}
+              </div>
+            </div>
+          ))}
         </div>
         {/* <button className="btn btn-danger btn-lg copy-btn" type="button" onClick={signOut}>
           Sign Out
