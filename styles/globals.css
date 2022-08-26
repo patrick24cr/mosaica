@@ -27,20 +27,67 @@ body {
 }
 
 .container1 {
-  padding: 30px;
+  padding: 10px;
   background-color: #1c154a;
 }
 
 .container2 {
-  padding: 30px;
+  padding: 10px;
   background-color: #1c154a;
+  width: 70vw;
+  
 }
 
 .gridWrapper {
+  margin: 30px;
   display: grid;
-  grid-template-columns: repeat(5, 2fr);
+  width: 50vw;
+  height: 50vw;
+  background-color: #ffffff;
 }
 
 .gridWrapper > div {
-  height: 100px;
+  margin: 0px;
+}
+
+.hoverContainer {
+  padding: 20%;
+  text-align: center;
+  height: 100%;
+  font-size: 2rem;
+  /* position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; */
+  color: rgb(255, 255, 255);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .2s, visibility .2s;
+}
+
+.gridWrapper > div:hover .hoverContainer {
+  visibility: visible;
+  opacity: 1;
+}
+
+.grade7 {
+  filter: hue-rotate(45);
+  opacity: 1;
+  animation-name: testAnimation;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes testAnimation {
+  0% {
+    filter: hue-rotate(45);
+  }
+  50% {
+    filter: hue-rotate(-20deg);
+  }
+  100% {
+    filter: hue-rotate(45);
+  }
 }
