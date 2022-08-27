@@ -16,8 +16,18 @@ function Home() {
   const [selected, setSelected] = useState('initial');
   const handleSelect = (e) => {
     const tileName = e.target.id.split('--')[1];
-    setSelected(tileName);
+    if (tileName === selected) {
+      setSelected('');
+    } else {
+      setSelected(tileName);
+    }
   };
+  const scoreFontSize = () => {
+    const heightAsLimit = 20 / height.length;
+    const widthAsLimit = 20 / width.length;
+    return Math.min(heightAsLimit, widthAsLimit);
+  };
+  console.warn(scoreFontSize());
   const colorAssociations = {
     a1: 7,
     a2: 6,
@@ -50,20 +60,56 @@ function Home() {
 
   return (
     <div className="container1">
-      <h1>Mosaica</h1>
-      <div className="container2">
-        <div className="gridWrapper" style={{ gridTemplateColumns: `repeat(${height.length}, 2fr)` }}>
+      <div className="navigationButtonsContainer">
+        <h1>Mosaica</h1>
+        <div className="navBarSpacer" />
+        <button className="button1" type="button" onClick={() => console.warn('profile')}>
+          Profile
+        </button>
+        <button className="button1" type="button" onClick={() => console.warn('groups')}>
+          Groups
+        </button>
+      </div>
+      <div className="metaGridContainer">
+        <div className="syntax">
+          {width.map((letter) => (
+            <div className="syntaxItem" style={{ width: `${100 / width.length}%` }}>{letter}</div>
+          ))}
+        </div>
+        <div className="verbs">
+          {height.map((number) => (
+            <div className="verbItem" style={{ lineHeight: `${60 / height.length}vw` }}>{number}</div>
+          ))}
+        </div>
+        <div
+          className="lessonGridContainer"
+          style={{ gridTemplateColumns: `repeat(${width.length}, 1fr)` }}
+        >
           {calculatedTileNames.map((tile) => (
-            <div key={`tile${tile}`} id={`tile--${tile}`} className={`tile grade${colorAssociations[tile] ? colorAssociations[tile] : '0'}${tile === selected ? ' selected' : ''}`}>
-              <div role="button" tabIndex={0} className="hoverContainer" id={`hover--${tile}`} onClick={(e) => handleSelect(e)} onKeyDown={console.warn('no keyboard support yet')}>
+            <div
+              key={`tile--${tile}`}
+              id={`tile--${tile}`}
+              className={`tile grade${colorAssociations[tile] ? colorAssociations[tile] : '0'}${tile === selected ? ' selected' : ''}`}
+            >
+              <div
+                role="button"
+                tabIndex={0}
+                className="hoverContainer"
+                id={`hover--${tile}`}
+                onClick={(e) => handleSelect(e)}
+                onKeyDown={() => console.warn('no keyboard support yet')}
+                style={{ fontSize: `${scoreFontSize()}vw` }}
+              >
                 {colorAssociations[tile] ? colorAssociations[tile] : 0}
               </div>
             </div>
           ))}
         </div>
-        {/* <button className="btn btn-danger btn-lg copy-btn" type="button" onClick={signOut}>
-          Sign Out
-        </button> */}
+      </div>
+      <div className="lessonButtonsContainer">
+        <button className="button1" type="button" onClick={() => console.warn(selected)}>
+          Start
+        </button>
       </div>
     </div>
   );
