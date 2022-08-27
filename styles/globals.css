@@ -20,43 +20,95 @@ a {
 }
 
 body {
-  background-color: #1c154a;
+  background-color: #1E1554;
   color: white;
   font-family: 'Comfortaa', cursive;
   /* font-family: 'ABeeZee', sans-serif; */
 }
 
 .container1 {
-  padding: 10px;
-  background-color: #1c154a;
+  padding-top: 30px;
+  width: 80vw;
+  /* background-color: #4d4676; */
 }
 
-.container2 {
-  padding: 10px;
-  background-color: #1c154a;
-  width: 70vw;
-  
-}
-
-.gridWrapper {
-  margin: 30px;
+.metaGridContainer {
+  width: 80vw;
+  min-height: 70vw;
+  padding-top: 3vw;
+  padding-bottom: 3vw;
+  /* background-color: #2b2a35; */
   display: grid;
-  width: 50vw;
-  height: 50vw;
-  background-color: #ffffff;
+  grid-template-columns: 20vw 60vw;
+  grid-template-rows: 10vw 60vw;
+  grid-template-areas: 
+    "blank syntax"
+    "verbs tiles";
 }
 
-.tile {
-  box-sizing: border-box;
-  /* height: 100px;
-  width: 100px; */
+.lessonGridContainer {
+  grid-area: tiles;
+  /* margin-right: 0px;
+  margin-left: auto; */
+  display: grid;
+  background-color: #ba5bfd;
+  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
 }
+
+.syntax {
+  grid-area: syntax;
+  width: 60vw;
+}
+
+.syntaxItem {
+  display: inline-block;
+  height: 100%;
+  /* background-color: #411899; */
+  text-align: center;
+  vertical-align: middle;
+  line-height: 10vw;
+}
+
+.verbItem {
+  width: 100%;
+  /* background-color: #411899; */
+  text-align: center;
+  vertical-align: middle;
+}
+
+.verbs {
+  grid-area: verbs;
+}
+
+.navigationButtonsContainer {
+  margin-left: auto;
+  margin-right: 0vw;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navBarSpacer {
+  flex-grow: 1;
+}
+
+.lessonButtonsContainer {
+  margin-left: auto;
+  margin-right: 0vw;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* .tile {
+  box-sizing: border-box;
+  height: 100px;
+  width: 100px;
+} */
 
 .hoverContainer {
   padding: 20%;
   text-align: center;
   height: 100%;
-  font-size: 2rem;
+  font-size: 4vw;
   /* position: absolute;
   top: 0;
   bottom: 0;
@@ -65,7 +117,7 @@ body {
   color: rgb(255, 255, 255);
   visibility: hidden;
   opacity: 0;
-  transition: opacity .2s, visibility .2s;
+  transition: opacity .5s, visibility .2s;
 }
 
 .tile:hover .hoverContainer {
@@ -74,17 +126,16 @@ body {
 }
 
 .selected {
-  border-style: solid;
+  scale: 0.9;
 }
 
 .grade7 {
   background-color: #FA1CFF;
   filter: hue-rotate(45);
-  opacity: 1;
-  animation-name: hueAnimation;
+  /* animation-name: hueAnimation;
   animation-duration: 1.5s;
   animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out; */
 }
 
 .grade6 {
@@ -125,4 +176,31 @@ body {
   100% {
     filter: hue-rotate(45);
   }
+}
+
+@keyframes sinkAnimation {
+  0% {
+    filter: hue-rotate(45);
+  }
+  50% {
+    filter: hue-rotate(-20deg);
+  }
+  100% {
+    filter: hue-rotate(45);
+  }
+}
+
+.button1 {
+  margin-left: 2vw;
+  font-family: ABeeZee;
+  background-color: #2A3880;
+  border: none;
+  color: white;
+  padding: 1.5vw 4vw;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 2.5vw;
+  /* border-radius: 0.4vw; */
+  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
 }
