@@ -5,12 +5,12 @@ import { useState } from 'react';
 
 function Home() {
   // const { user } = useAuth();
-  const width = ['a', 'b', 'c', 'd', 'e'];
-  const height = ['1', '2', '3', '4', '5'];
+  const columns = ['a', 'b', 'c', 'd', 'e'];
+  const rows = ['1', '2', '3', '4', '5'];
   const calculatedTileNames = [];
-  for (let y = 0; y < height.length; y++) {
-    for (let x = 0; x < width.length; x++) {
-      calculatedTileNames.push(`${width[x]}${height[y]}`);
+  for (let y = 0; y < rows.length; y++) {
+    for (let x = 0; x < columns.length; x++) {
+      calculatedTileNames.push(`${columns[x]}${rows[y]}`);
     }
   }
   const [selected, setSelected] = useState('initial');
@@ -23,11 +23,13 @@ function Home() {
     }
   };
   const scoreFontSize = () => {
-    const heightAsLimit = 20 / height.length;
-    const widthAsLimit = 20 / width.length;
+    const heightAsLimit = 20 / rows.length;
+    const widthAsLimit = 20 / columns.length;
     return Math.min(heightAsLimit, widthAsLimit);
   };
-  console.warn(scoreFontSize());
+  // const highlightElements = (e) => {
+  //   const tileName = e.target.id.split('--')[1];
+  // };
   const colorAssociations = {
     a1: 7,
     a2: 6,
@@ -72,18 +74,18 @@ function Home() {
       </div>
       <div className="metaGridContainer">
         <div className="syntax">
-          {width.map((letter) => (
-            <div className="syntaxItem" style={{ width: `${100 / width.length}%` }}>{letter}</div>
+          {columns.map((letter) => (
+            <div key={letter} id={`syntax--${letter}`} className="syntaxItem" style={{ width: `${100 / columns.length}%` }}>{letter}</div>
           ))}
         </div>
         <div className="verbs">
-          {height.map((number) => (
-            <div className="verbItem" style={{ lineHeight: `${60 / height.length}vw` }}>{number}</div>
+          {rows.map((number) => (
+            <div key={number} id={`verb--${number}`} className="verbItem" style={{ lineHeight: `${60 / rows.length}vw` }}>{number}</div>
           ))}
         </div>
         <div
           className="lessonGridContainer"
-          style={{ gridTemplateColumns: `repeat(${width.length}, 1fr)` }}
+          style={{ gridTemplateColumns: `repeat(${columns.length}, 1fr)` }}
         >
           {calculatedTileNames.map((tile) => (
             <div
