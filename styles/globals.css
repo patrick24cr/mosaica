@@ -32,6 +32,17 @@ body {
   /* background-color: #4d4676; */
 }
 
+.navigationButtonsContainer {
+  margin-left: auto;
+  margin-right: 0vw;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navBarSpacer {
+  flex-grow: 1;
+}
+
 .metaGridContainer {
   width: 80vw;
   min-height: 70vw;
@@ -46,13 +57,34 @@ body {
     "verbs tiles";
 }
 
+.lessonGridBackground {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-color: #1c77ff;
+  /* filter: hue-rotate(45);
+  animation-name: hueAnimation;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out; */
+
+  animation-name: colorAnimation;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
 .lessonGridContainer {
+  position: relative;
   grid-area: tiles;
   /* margin-right: 0px;
   margin-left: auto; */
   display: grid;
-  background-color: #ba5bfd;
-  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+  /* background-color: hsl(0, 0%, 100%); */
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 .syntax {
@@ -63,32 +95,29 @@ body {
 .syntaxItem {
   display: inline-block;
   height: 100%;
-  /* background-color: #411899; */
   text-align: center;
   vertical-align: middle;
   line-height: 10vw;
+  transition: background-color .5s;
+}
+
+.highlightedSyntaxItem {
+  background-color: #362983;
 }
 
 .verbItem {
   width: 100%;
-  /* background-color: #411899; */
   text-align: center;
   vertical-align: middle;
+  transition: background-color .5s;
+}
+
+.highlightedVerbItem {
+  background-color: #362983;
 }
 
 .verbs {
   grid-area: verbs;
-}
-
-.navigationButtonsContainer {
-  margin-left: auto;
-  margin-right: 0vw;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.navBarSpacer {
-  flex-grow: 1;
 }
 
 .lessonButtonsContainer {
@@ -98,44 +127,41 @@ body {
   justify-content: flex-end;
 }
 
-/* .tile {
-  box-sizing: border-box;
-  height: 100px;
-  width: 100px;
-} */
+.tile {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  transition: scale .5s, border-radius .5s, background-color .2s, filter .5s, opacity 1.5s;
+}
 
-.hoverContainer {
-  padding: 20%;
+.metaTile {
+  position: relative;
+}
+
+.scoreContainer {
+  /* padding: 20%; */
   text-align: center;
   height: 100%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 5vw;
+  width: 100%;
   font-size: 4vw;
-  /* position: absolute;
+  position: absolute;
   top: 0;
-  bottom: 0;
   left: 0;
-  right: 0; */
+  z-index: 2;
   color: rgb(255, 255, 255);
-  visibility: hidden;
   opacity: 0;
-  transition: opacity .5s, visibility .2s;
+  transition: opacity .5s, visibility .5s;
 }
 
-.tile:hover .hoverContainer {
-  visibility: visible;
+.highlightedScore {
   opacity: 1;
-}
-
-.selected {
-  scale: 0.9;
 }
 
 .grade7 {
   background-color: #FA1CFF;
-  filter: hue-rotate(45);
-  /* animation-name: hueAnimation;
-  animation-duration: 1.5s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out; */
 }
 
 .grade6 {
@@ -166,6 +192,11 @@ body {
   background-color: #210360;
 }
 
+.selected {
+  background-color: #ffffff;
+  opacity: 0%;
+}
+
 @keyframes hueAnimation {
   0% {
     filter: hue-rotate(45);
@@ -178,21 +209,21 @@ body {
   }
 }
 
-@keyframes sinkAnimation {
+@keyframes colorAnimation {
   0% {
-    filter: hue-rotate(45);
+    background-color: #1c77ff;
   }
   50% {
-    filter: hue-rotate(-20deg);
+    background-color: #1E1554;
   }
   100% {
-    filter: hue-rotate(45);
+    background-color: #1c77ff;
   }
 }
 
 .button1 {
   margin-left: 2vw;
-  font-family: ABeeZee;
+  font-family: 'ABeeZee', sans-serif;
   background-color: #2A3880;
   border: none;
   color: white;

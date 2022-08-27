@@ -3,17 +3,44 @@
 
 import { useState } from 'react';
 
+// hard coded issues:
+// scoreFontSize, viewwidth proportions in CSS grids (60vw currently)
+
 function Home() {
   // const { user } = useAuth();
-  const width = ['a', 'b', 'c', 'd', 'e'];
-  const height = ['1', '2', '3', '4', '5'];
+  const columns = ['a', 'b', 'c', 'd', 'e'];
+  const rows = ['1', '2', '3', '4', '5'];
   const calculatedTileNames = [];
-  for (let y = 0; y < height.length; y++) {
-    for (let x = 0; x < width.length; x++) {
-      calculatedTileNames.push(`${width[x]}${height[y]}`);
+  for (let y = 0; y < rows.length; y++) {
+    for (let x = 0; x < columns.length; x++) {
+      calculatedTileNames.push(`${columns[x]}${rows[y]}`);
     }
   }
   const [selected, setSelected] = useState('initial');
+  const scoreFontSize = () => {
+    const heightAsLimit = 20 / rows.length;
+    const widthAsLimit = 20 / columns.length;
+    return Math.min(heightAsLimit, widthAsLimit);
+  };
+  const scoreLineHeight = () => 60 / rows.length;
+  const highlightElements = (e) => {
+    const tileName = e.target.id.split('--')[1];
+    const score = document.getElementById(`hover--${tileName}`);
+    const syntax = document.getElementById(`syntax--${tileName[0]}`);
+    const verb = document.getElementById(`verb--${tileName[1]}`);
+    score.classList.add('highlightedScore');
+    syntax.classList.add('highlightedSyntaxItem');
+    verb.classList.add('highlightedVerbItem');
+  };
+  const unHighlightElements = (e) => {
+    const tileName = e.target.id.split('--')[1];
+    const score = document.getElementById(`hover--${tileName}`);
+    const syntax = document.getElementById(`syntax--${tileName[0]}`);
+    const verb = document.getElementById(`verb--${tileName[1]}`);
+    score.classList.remove('highlightedScore');
+    syntax.classList.remove('highlightedSyntaxItem');
+    verb.classList.remove('highlightedVerbItem');
+  };
   const handleSelect = (e) => {
     const tileName = e.target.id.split('--')[1];
     if (tileName === selected) {
@@ -22,12 +49,6 @@ function Home() {
       setSelected(tileName);
     }
   };
-  const scoreFontSize = () => {
-    const heightAsLimit = 20 / height.length;
-    const widthAsLimit = 20 / width.length;
-    return Math.min(heightAsLimit, widthAsLimit);
-  };
-  console.warn(scoreFontSize());
   const colorAssociations = {
     a1: 7,
     a2: 6,
@@ -72,33 +93,37 @@ function Home() {
       </div>
       <div className="metaGridContainer">
         <div className="syntax">
-          {width.map((letter) => (
-            <div className="syntaxItem" style={{ width: `${100 / width.length}%` }}>{letter}</div>
+          {columns.map((letter) => (
+            <div key={letter} id={`syntax--${letter}`} className="syntaxItem" style={{ width: `${100 / columns.length}%` }}>{letter}</div>
           ))}
         </div>
         <div className="verbs">
-          {height.map((number) => (
-            <div className="verbItem" style={{ lineHeight: `${60 / height.length}vw` }}>{number}</div>
+          {rows.map((number) => (
+            <div key={number} id={`verb--${number}`} className="verbItem" style={{ lineHeight: `${60 / rows.length}vw` }}>{number}</div>
           ))}
         </div>
         <div
           className="lessonGridContainer"
-          style={{ gridTemplateColumns: `repeat(${width.length}, 1fr)` }}
+          style={{ gridTemplateColumns: `repeat(${columns.length}, 1fr)` }}
         >
+          <div className="lessonGridBackground" />
           {calculatedTileNames.map((tile) => (
-            <div
-              key={`tile--${tile}`}
-              id={`tile--${tile}`}
-              className={`tile grade${colorAssociations[tile] ? colorAssociations[tile] : '0'}${tile === selected ? ' selected' : ''}`}
-            >
+            <div className="metaTile" key={tile}>
+              <div
+                key={`tile--${tile}`}
+                id={`tile--${tile}`}
+                className={`tile grade${colorAssociations[tile] ? colorAssociations[tile] : '0'}${tile === selected ? ' selected' : ''}`}
+              />
               <div
                 role="button"
                 tabIndex={0}
-                className="hoverContainer"
+                className="scoreContainer"
                 id={`hover--${tile}`}
                 onClick={(e) => handleSelect(e)}
+                onMouseEnter={(e) => highlightElements(e)}
+                onMouseLeave={(e) => unHighlightElements(e)}
                 onKeyDown={() => console.warn('no keyboard support yet')}
-                style={{ fontSize: `${scoreFontSize()}vw` }}
+                style={{ fontSize: `${scoreFontSize()}vw`, lineHeight: `${scoreLineHeight()}vw` }}
               >
                 {colorAssociations[tile] ? colorAssociations[tile] : 0}
               </div>
