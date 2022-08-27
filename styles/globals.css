@@ -46,8 +46,10 @@ body {
   background-color: #ffffff;
 }
 
-.gridWrapper > div {
-  margin: 0px;
+.tile {
+  box-sizing: border-box;
+  /* height: 100px;
+  width: 100px; */
 }
 
 .hoverContainer {
@@ -66,21 +68,54 @@ body {
   transition: opacity .2s, visibility .2s;
 }
 
-.gridWrapper > div:hover .hoverContainer {
+.tile:hover .hoverContainer {
   visibility: visible;
   opacity: 1;
 }
 
+.selected {
+  border-style: solid;
+}
+
 .grade7 {
+  background-color: #FA1CFF;
   filter: hue-rotate(45);
   opacity: 1;
-  animation-name: testAnimation;
+  animation-name: hueAnimation;
   animation-duration: 1.5s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
 }
 
-@keyframes testAnimation {
+.grade6 {
+  background-color: #DF1EF0;
+}
+
+.grade5 {
+  background-color: #9C15DB;
+}
+
+.grade4 {
+  background-color: #7B23D2;
+}
+
+.grade3 {
+  background-color: #621BBB;
+}
+
+.grade2 {
+  background-color: #411899;
+}
+
+.grade1 {
+  background-color: #2D0582;
+}
+
+.grade0 {
+  background-color: #210360;
+}
+
+@keyframes hueAnimation {
   0% {
     filter: hue-rotate(45);
   }

@@ -1,21 +1,27 @@
 // import { signOut } from '../utils/auth';
 // import { useAuth } from '../utils/context/authContext';
 
+import { useState } from 'react';
+
 function Home() {
   // const { user } = useAuth();
-  const width = ['a', 'b', 'c', 'd', 'e', 'f'];
-  const height = ['1', '2', '3', '4', '5', '6'];
+  const width = ['a', 'b', 'c', 'd', 'e'];
+  const height = ['1', '2', '3', '4', '5'];
   const calculatedTileNames = [];
   for (let y = 0; y < height.length; y++) {
     for (let x = 0; x < width.length; x++) {
       calculatedTileNames.push(`${width[x]}${height[y]}`);
     }
   }
-  const colorPaletteArray = ['#210360', '#2D0582', '#411899', '#621BBB', '#7B23D2', '#9C15DB', '#DF1EF0', '#FA1CFF'];
+  const [selected, setSelected] = useState('initial');
+  const handleSelect = (e) => {
+    const tileName = e.target.id.split('--')[1];
+    setSelected(tileName);
+  };
   const colorAssociations = {
     a1: 7,
     a2: 6,
-    a3: 5,
+    a3: 7,
     a4: 4,
     a5: 3,
     a6: 2,
@@ -25,14 +31,14 @@ function Home() {
     b3: 3,
     b4: 3,
     b5: 4,
-    c1: 3,
+    c1: 4,
     c2: 3,
-    c3: 2,
+    c3: 4,
     c4: 2,
     c5: 2,
     d1: 4,
-    d2: 4,
-    d3: 3,
+    d2: 5,
+    d3: 2,
     d4: 3,
     d5: 1,
     e1: 5,
@@ -48,8 +54,8 @@ function Home() {
       <div className="container2">
         <div className="gridWrapper" style={{ gridTemplateColumns: `repeat(${height.length}, 2fr)` }}>
           {calculatedTileNames.map((tile) => (
-            <div key={`tile${tile}`} id={`tile${tile}`} className={`grade${colorAssociations[tile]}`} style={{ backgroundColor: `${colorAssociations[tile] ? colorPaletteArray[colorAssociations[tile]] : colorPaletteArray[0]}` }}>
-              <div className="hoverContainer">
+            <div key={`tile${tile}`} id={`tile--${tile}`} className={`tile grade${colorAssociations[tile] ? colorAssociations[tile] : '0'}${tile === selected ? ' selected' : ''}`}>
+              <div role="button" tabIndex={0} className="hoverContainer" id={`hover--${tile}`} onClick={(e) => handleSelect(e)} onKeyDown={console.warn('no keyboard support yet')}>
                 {colorAssociations[tile] ? colorAssociations[tile] : 0}
               </div>
             </div>
