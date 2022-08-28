@@ -3,9 +3,6 @@
 
 import { useState } from 'react';
 
-// hard coded issues:
-// scoreFontSize, viewwidth proportions in CSS grids (60vw currently)
-
 function Home() {
   // const { user } = useAuth();
   const columns = ['a', 'b', 'c', 'd', 'e'];
@@ -17,12 +14,23 @@ function Home() {
     }
   }
   const [selected, setSelected] = useState('initial');
+
+  // begin hard-coded sizing constants
   const scoreFontSize = () => {
     const heightAsLimit = 20 / rows.length;
     const widthAsLimit = 20 / columns.length;
     return Math.min(heightAsLimit, widthAsLimit);
   };
+  const labelFontSize = () => {
+    const heightAsLimit = 10 / rows.length;
+    const widthAsLimit = 10 / columns.length;
+    return Math.min(heightAsLimit, widthAsLimit);
+  };
   const scoreLineHeight = () => 60 / rows.length;
+  const verbItemLineHeight = () => 60 / rows.length;
+  const syntaxItemLineHeight = () => 10;
+  // end hard-coded sizing constants
+
   const highlightElements = (e) => {
     const tileName = e.target.id.split('--')[1];
     const score = document.getElementById(`hover--${tileName}`);
@@ -49,7 +57,7 @@ function Home() {
       setSelected(tileName);
     }
   };
-  const colorAssociations = {
+  const gradeTable = {
     a1: 7,
     a2: 6,
     a3: 7,
@@ -79,6 +87,19 @@ function Home() {
     e5: 1,
   };
 
+  const lessonCategories = {
+    1: 'regular',
+    2: 'irregular',
+    3: 'really irregular',
+    4: 'weird irregular',
+    5: 'sooo irregular',
+    a: 'present',
+    b: 'objects',
+    c: 'preterite',
+    d: 'imperfect',
+    e: 'future',
+  }
+
   return (
     <div className="container1">
       <div className="navigationButtonsContainer">
@@ -94,12 +115,12 @@ function Home() {
       <div className="metaGridContainer">
         <div className="syntaxContainer">
           {columns.map((letter) => (
-            <div key={letter} id={`syntax--${letter}`} className="syntaxItem" style={{ width: `${100 / columns.length}%` }}>{letter}</div>
+            <div key={letter} id={`syntax--${letter}`} className="syntaxItem" style={{ width: `${100 / columns.length}%`, lineHeight: `${syntaxItemLineHeight()}vw`, fontSize: `${labelFontSize()}vw` }}>{lessonCategories[letter]}</div>
           ))}
         </div>
         <div className="verbContainer">
           {rows.map((number) => (
-            <div key={number} id={`verb--${number}`} className="verbItem" style={{ lineHeight: `${60 / rows.length}vw` }}>{number}</div>
+            <div key={number} id={`verb--${number}`} className="verbItem" style={{ lineHeight: `${verbItemLineHeight()}vw`, fontSize: `${labelFontSize()}vw` }}>{lessonCategories[number]}</div>
           ))}
         </div>
         <div
@@ -112,7 +133,7 @@ function Home() {
               <div
                 key={`tile--${tile}`}
                 id={`tile--${tile}`}
-                className={`tile grade${colorAssociations[tile] ? colorAssociations[tile] : '0'}${tile === selected ? ' selected' : ''}`}
+                className={`tile grade${gradeTable[tile] ? gradeTable[tile] : '0'}${tile === selected ? ' selected' : ''}`}
               />
               <div
                 role="button"
@@ -125,7 +146,7 @@ function Home() {
                 onKeyDown={() => console.warn('no keyboard support yet')}
                 style={{ fontSize: `${scoreFontSize()}vw`, lineHeight: `${scoreLineHeight()}vw` }}
               >
-                {colorAssociations[tile] ? colorAssociations[tile] : 0}
+                {gradeTable[tile] ? gradeTable[tile] : 0}
               </div>
             </div>
           ))}
