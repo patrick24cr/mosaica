@@ -57,6 +57,7 @@ function Home() {
       setSelected(tileName);
     }
   };
+
   const gradeTable = {
     a1: 7,
     a2: 6,
@@ -98,7 +99,7 @@ function Home() {
     c: 'preterite',
     d: 'imperfect',
     e: 'future',
-  }
+  };
 
   return (
     <div className="container1">
