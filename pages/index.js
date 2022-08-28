@@ -15,7 +15,6 @@ function Home() {
     a3: 7,
     a4: 4,
     a5: 3,
-    a6: 2,
     a7: 1,
     b1: 5,
     b2: 4,
@@ -40,10 +39,10 @@ function Home() {
   };
 
   const lessonCategories = {
-    1: 'regular',
-    2: 'irregular',
-    3: 'really irregular',
-    4: 'weird irregular',
+    1: 'regular verbs',
+    2: 'irregular verbs',
+    3: 'irregular verbs 2',
+    4: 'irregular verbs 3',
     5: 'sooo irregular',
     a: 'present',
     b: 'objects',
@@ -118,12 +117,12 @@ function Home() {
       <div className="metaGridContainer">
         <div className="syntaxContainer">
           {columns.map((letter) => (
-            <div key={letter} id={`syntax--${letter}`} className="syntaxItem" style={{ width: `${100 / columns.length}%`, lineHeight: `${syntaxItemLineHeight()}vw`, fontSize: `${labelFontSize()}vw` }}>{lessonCategories[letter]}</div>
+            <div key={letter} id={`syntax--${letter}`} className="syntaxItem" style={{ width: `${100 / columns.length}%`, lineHeight: `${syntaxItemLineHeight()}vw`, fontSize: `${labelFontSize()}vw` }}>{lessonCategories[letter] ? lessonCategories[letter] : letter}</div>
           ))}
         </div>
         <div className="verbContainer">
           {rows.map((number) => (
-            <div key={number} id={`verb--${number}`} className="verbItem" style={{ lineHeight: `${verbItemLineHeight()}vw`, fontSize: `${labelFontSize()}vw` }}>{lessonCategories[number]}</div>
+            <div key={number} id={`verb--${number}`} className="verbItem" style={{ lineHeight: `${verbItemLineHeight()}vw`, fontSize: `${labelFontSize()}vw` }}>{lessonCategories[number] ? lessonCategories[number] : number}</div>
           ))}
         </div>
         <div

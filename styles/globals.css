@@ -22,7 +22,7 @@ a {
 body {
   background-color: #1E1554;
   color: white;
-  font-family: 'ABeeZee', sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .container1 {
@@ -244,5 +244,6 @@ body {
   font-size: 2.5vw;
   border-radius: 1vw;
   letter-spacing: 0.2vw;
+  font-family: 'ABeeZee', sans-serif;
   /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
 }
