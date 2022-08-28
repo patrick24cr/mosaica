@@ -82,7 +82,7 @@ function Home() {
   return (
     <div className="container1">
       <div className="navigationButtonsContainer">
-        <h1>Mosaica</h1>
+        <div className="logo">Mosaica</div>
         <div className="navBarSpacer" />
         <button className="button1" type="button" onClick={() => console.warn('profile')}>
           Profile
@@ -92,12 +92,12 @@ function Home() {
         </button>
       </div>
       <div className="metaGridContainer">
-        <div className="syntax">
+        <div className="syntaxContainer">
           {columns.map((letter) => (
             <div key={letter} id={`syntax--${letter}`} className="syntaxItem" style={{ width: `${100 / columns.length}%` }}>{letter}</div>
           ))}
         </div>
-        <div className="verbs">
+        <div className="verbContainer">
           {rows.map((number) => (
             <div key={number} id={`verb--${number}`} className="verbItem" style={{ lineHeight: `${60 / rows.length}vw` }}>{number}</div>
           ))}
