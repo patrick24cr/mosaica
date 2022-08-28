@@ -117,7 +117,7 @@ function Home() {
               <div
                 role="button"
                 tabIndex={0}
-                className="scoreContainer"
+                className={`scoreContainer${tile === selected ? ' selectedScore' : ''}`}
                 id={`hover--${tile}`}
                 onClick={(e) => handleSelect(e)}
                 onMouseEnter={(e) => highlightElements(e)}
