@@ -5,8 +5,53 @@ import { useState } from 'react';
 
 function Home() {
   // const { user } = useAuth();
+
   const columns = ['a', 'b', 'c', 'd', 'e'];
   const rows = ['1', '2', '3', '4', '5'];
+
+  const gradeTable = {
+    a1: 7,
+    a2: 6,
+    a3: 7,
+    a4: 4,
+    a5: 3,
+    a6: 2,
+    a7: 1,
+    b1: 5,
+    b2: 4,
+    b3: 3,
+    b4: 3,
+    b5: 4,
+    c1: 4,
+    c2: 3,
+    c3: 4,
+    c4: 2,
+    c5: 2,
+    d1: 4,
+    d2: 5,
+    d3: 2,
+    d4: 3,
+    d5: 1,
+    e1: 5,
+    e2: 4,
+    e3: 3,
+    e4: 2,
+    e5: 1,
+  };
+
+  const lessonCategories = {
+    1: 'regular',
+    2: 'irregular',
+    3: 'really irregular',
+    4: 'weird irregular',
+    5: 'sooo irregular',
+    a: 'present',
+    b: 'objects',
+    c: 'preterite',
+    d: 'imperfect',
+    e: 'future',
+  };
+
   const calculatedTileNames = [];
   for (let y = 0; y < rows.length; y++) {
     for (let x = 0; x < columns.length; x++) {
@@ -56,49 +101,6 @@ function Home() {
     } else {
       setSelected(tileName);
     }
-  };
-
-  const gradeTable = {
-    a1: 7,
-    a2: 6,
-    a3: 7,
-    a4: 4,
-    a5: 3,
-    a6: 2,
-    a7: 1,
-    b1: 5,
-    b2: 4,
-    b3: 3,
-    b4: 3,
-    b5: 4,
-    c1: 4,
-    c2: 3,
-    c3: 4,
-    c4: 2,
-    c5: 2,
-    d1: 4,
-    d2: 5,
-    d3: 2,
-    d4: 3,
-    d5: 1,
-    e1: 5,
-    e2: 4,
-    e3: 3,
-    e4: 2,
-    e5: 1,
-  };
-
-  const lessonCategories = {
-    1: 'regular',
-    2: 'irregular',
-    3: 'really irregular',
-    4: 'weird irregular',
-    5: 'sooo irregular',
-    a: 'present',
-    b: 'objects',
-    c: 'preterite',
-    d: 'imperfect',
-    e: 'future',
   };
 
   return (
