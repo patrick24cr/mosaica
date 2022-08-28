@@ -45,10 +45,10 @@ function Home() {
     4: 'irregular verbs 3',
     5: 'sooo irregular',
     a: 'present',
-    b: 'objects',
-    c: 'preterite',
-    d: 'imperfect',
-    e: 'future',
+    b: 'past',
+    c: 'future',
+    d: 'conditional',
+    e: 'subjunctive',
   };
 
   const calculatedTileNames = [];
@@ -155,6 +155,9 @@ function Home() {
         </div>
       </div>
       <div className="lessonButtonsContainer">
+        <button className="button1" type="button" onClick={() => console.warn('music')}>
+          Music ▾
+        </button>
         <button className="button1" type="button" onClick={() => console.warn(selected)}>
           Start
         </button>
