@@ -1,8 +1,4 @@
 import React from 'react';
-// import { useEffect, useState } from 'react';
-// import { useRouter } from 'next/router';
-// import { useAuth } from '../utils/context/authContext';
-// import { getScoresByUid } from '../api/scores';
 import PropTypes from 'prop-types';
 
 function GridInteractable({ scores, selected, setSelected }) {
