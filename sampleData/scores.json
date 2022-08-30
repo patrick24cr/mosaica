@@ -1,0 +1,160 @@
+{
+  "scores": {
+    "-NAfwOoJSARgNsrzvdxx": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdxx",
+      "score": 7,
+      "tile": "a1",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz2"
+    },
+    "-NAfwOoJSARgNsrzvdA1": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdA1",
+      "score": 7,
+      "tile": "a1",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvdA2": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdA2",
+      "score": 6,
+      "tile": "a2",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvdA3": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdA3",
+      "score": 7,
+      "tile": "a3",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvdA4": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdA4",
+      "score": 4,
+      "tile": "a4",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvdA5": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdA5",
+      "score": 3,
+      "tile": "a5",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvdb1": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdb1",
+      "score": 5,
+      "tile": "b1",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvdb2": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdb2",
+      "score": 4,
+      "tile": "b2",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvdb3": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdb3",
+      "score": 3,
+      "tile": "b3",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvdb4": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdb4",
+      "score": 3,
+      "tile": "b4",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvdb5": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdb5",
+      "score": 3,
+      "tile": "b5",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvdc1": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdc1",
+      "score": 4,
+      "tile": "c1",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvdc2": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdc2",
+      "score": 3,
+      "tile": "c2",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvdc3": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdc3",
+      "score": 4,
+      "tile": "c3",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvdc4": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdc4",
+      "score": 2,
+      "tile": "c4",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvdc5": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdc5",
+      "score": 2,
+      "tile": "c5",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvdd1": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdd1",
+      "score": 4,
+      "tile": "d1",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvdd2": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdd2",
+      "score": 5,
+      "tile": "d2",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvdd3": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdd3",
+      "score": 2,
+      "tile": "d3",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvdd4": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdd4",
+      "score": 3,
+      "tile": "d4",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvdd5": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvdd5",
+      "score": 1,
+      "tile": "d5",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvde1": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvde1",
+      "score": 5,
+      "tile": "e1",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvde2": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvde2",
+      "score": 4,
+      "tile": "e2",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvde3": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvde3",
+      "score": 3,
+      "tile": "e3",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvde4": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvde4",
+      "score": 2,
+      "tile": "e4",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    },
+    "-NAfwOoJSARgNsrzvde5": {
+      "firebaseKey": "-NAfwOoJSARgNsrzvde5",
+      "score": 1,
+      "tile": "e5",
+      "uid": "Qx75UZAoPEdH0yj0S1YITumtIuz1"
+    }
+  }
+}

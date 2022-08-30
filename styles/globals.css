@@ -233,6 +233,7 @@ body {
 }
 
 .button1 {
+  /* box-sizing: border-box; */
   margin-left: 2vw;
   background-color: #2A3880;
   border: none;
@@ -246,4 +247,18 @@ body {
   letter-spacing: 0.2vw;
   font-family: 'ABeeZee', sans-serif;
   /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+}
+
+.buttonSelected {
+  background-color: #4354a9;
+  /* border: solid;
+  border-color: #ffffff; */
+}
+
+.testDiv {
+  /* background-color: #1c77ff; */
+  text-align: center;
+  padding-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
 }

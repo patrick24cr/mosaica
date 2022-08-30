@@ -1,54 +1,33 @@
 // import { signOut } from '../utils/auth';
-// import { useAuth } from '../utils/context/authContext';
-
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useAuth } from '../utils/context/authContext';
+import { getScoresByUid } from '../api/scores';
+import TopNavigation from '../components/TopNavigation';
 
 function Home() {
-  // const { user } = useAuth();
+  const { user } = useAuth();
+  const [scores, setScores] = useState({});
+  const [selected, setSelected] = useState('initial');
+  useEffect(() => {
+    getScoresByUid(user.uid).then(setScores);
+  }, [user.uid]);
+  const router = useRouter();
 
   const columns = ['a', 'b', 'c', 'd', 'e'];
   const rows = ['1', '2', '3', '4', '5'];
 
-  const gradeTable = {
-    a1: 7,
-    a2: 6,
-    a3: 7,
-    a4: 4,
-    a5: 3,
-    a7: 1,
-    b1: 5,
-    b2: 4,
-    b3: 3,
-    b4: 3,
-    b5: 4,
-    c1: 4,
-    c2: 3,
-    c3: 4,
-    c4: 2,
-    c5: 2,
-    d1: 4,
-    d2: 5,
-    d3: 2,
-    d4: 3,
-    d5: 1,
-    e1: 5,
-    e2: 4,
-    e3: 3,
-    e4: 2,
-    e5: 1,
-  };
-
   const lessonCategories = {
-    1: 'regular verbs',
-    2: 'irregular verbs',
-    3: 'irregular verbs 2',
-    4: 'irregular verbs 3',
-    5: 'sooo irregular',
-    a: 'present',
-    b: 'past',
-    c: 'future',
-    d: 'conditional',
-    e: 'subjunctive',
+    1: 'test 1',
+    2: 'test 2',
+    3: 'test 3',
+    4: 'test 4',
+    5: 'test 5',
+    a: 'test a',
+    b: 'test b',
+    c: 'test c',
+    d: 'test d',
+    e: 'test e',
   };
 
   const calculatedTileNames = [];
@@ -57,7 +36,6 @@ function Home() {
       calculatedTileNames.push(`${columns[x]}${rows[y]}`);
     }
   }
-  const [selected, setSelected] = useState('initial');
 
   // begin hard-coded sizing constants
   const scoreFontSize = () => {
@@ -104,16 +82,7 @@ function Home() {
 
   return (
     <div className="container1">
-      <div className="navigationButtonsContainer">
-        <div className="logo">Mosaica</div>
-        <div className="navBarSpacer" />
-        <button className="button1" type="button" onClick={() => console.warn('profile')}>
-          Profile
-        </button>
-        <button className="button1" type="button" onClick={() => console.warn('groups')}>
-          Groups
-        </button>
-      </div>
+      <TopNavigation />
       <div className="metaGridContainer">
         <div className="syntaxContainer">
           {columns.map((letter) => (
@@ -135,7 +104,7 @@ function Home() {
               <div
                 key={`tile--${tile}`}
                 id={`tile--${tile}`}
-                className={`tile grade${gradeTable[tile] ? gradeTable[tile] : '0'}${tile === selected ? ' selected' : ''}`}
+                className={`tile grade${scores[tile] ? scores[tile] : '0'}${tile === selected ? ' selected' : ''}`}
               />
               <div
                 role="button"
@@ -148,17 +117,17 @@ function Home() {
                 onKeyDown={() => console.warn('no keyboard support yet')}
                 style={{ fontSize: `${scoreFontSize()}vw`, lineHeight: `${scoreLineHeight()}vw` }}
               >
-                {gradeTable[tile] ? gradeTable[tile] : 0}
+                {scores[tile] ? scores[tile] : 0}
               </div>
             </div>
           ))}
         </div>
       </div>
       <div className="lessonButtonsContainer">
-        <button className="button1" type="button" onClick={() => console.warn('music')}>
+        {/* <button className="button1" type="button" onClick={() => console.warn('music')}>
           Music ▾
-        </button>
-        <button className="button1" type="button" onClick={() => console.warn(selected)}>
+        </button> */}
+        <button className="button1" type="button" onClick={() => router.push(`/lesson/${selected}`)}>
           Start
         </button>
       </div>
