@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import TopNavigation from '../../components/TopNavigation';
-import { resetAllScoresByUid } from '../../api/scores';
+import { deleteAllScoresByUid } from '../../api/scores';
 import { useAuth } from '../../utils/context/authContext';
 
 export default function Profile() {
@@ -13,7 +13,7 @@ export default function Profile() {
       <TopNavigation />
       <div className="testDiv">
         <p>User: {uid}</p>
-        <button className="button1" type="button" onClick={() => resetAllScoresByUid(user.uid)}>
+        <button className="button1" type="button" onClick={() => deleteAllScoresByUid(user.uid).then(() => router.push('/'))}>
           Reset User Scores
         </button>
       </div>
