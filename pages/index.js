@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useAuth } from '../utils/context/authContext';
 import { getScoresByUid } from '../api/scores';
 import TopNavigation from '../components/TopNavigation';
+import GridInteractable from '../components/GridInteractable';
 
 function Home() {
   const { user } = useAuth();
@@ -83,6 +84,7 @@ function Home() {
   return (
     <div className="container1">
       <TopNavigation />
+      <GridInteractable scores={scores} selected={selected} setSelected={setSelected} />
       <div className="metaGridContainer">
         <div className="syntaxContainer">
           {columns.map((letter) => (
@@ -124,9 +126,6 @@ function Home() {
         </div>
       </div>
       <div className="lessonButtonsContainer">
-        {/* <button className="button1" type="button" onClick={() => console.warn('music')}>
-          Music ▾
-        </button> */}
         <button className="button1" type="button" onClick={() => router.push(`/lesson/${selected}`)}>
           Start
         </button>
