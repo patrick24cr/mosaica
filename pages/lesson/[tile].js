@@ -5,6 +5,7 @@ import { useAuth } from '../../utils/context/authContext';
 import {
   createScore, getScoreFirebaseKeysByUid, getScoresByUid, updateScoreByFirebaseKey,
 } from '../../api/scores';
+import questions from '../../sampleData/questions.json';
 
 const initialState = {
   score: '',
@@ -17,10 +18,12 @@ export default function Lesson() {
   const [scores, setScores] = useState({});
   const [firebaseKeys, setFirebaseKeys] = useState({});
   const [formInput, setFormInput] = useState(initialState);
+  const questionNumber = 0;
   useEffect(() => {
     getScoresByUid(user.uid).then(setScores);
     getScoreFirebaseKeysByUid(user.uid).then(setFirebaseKeys);
   }, [user.uid]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormInput((prevState) => ({
@@ -44,18 +47,57 @@ export default function Lesson() {
       createScore(payload).then(() => router.push('/'));
     }
   };
+
   return (
     <div className="container1">
       <TopNavigation />
-      <div className="testDiv">
-        <p>Lesson: {tile}</p>
-        <p>Past score: {scores[tile] ? scores[tile] : 'no score yet'}</p>
-        <form onSubmit={handleSubmit}>
-          <input type="text" id="score" placeholder="Current score" name="score" value={formInput.score} onChange={handleChange} required /> <br /><br />
-          <button type="submit" className="button1">
-            Average and Update Score
-          </button>
-        </form>
+      <div className="quizContainer">
+        <div className="prompt">{questions[questionNumber].english}</div>
+        <div className="constructedSpanish">{questions[questionNumber].spanish}</div>
+        <div className="responseContainer">
+          <div className="responseGroup">
+            <div className="response">
+              {questions[questionNumber].responses[0][0]}
+            </div>
+            <div className="response">
+              {questions[questionNumber].responses[0][1]}
+            </div>
+            <div className="response">
+              {questions[questionNumber].responses[0][2]}
+            </div>
+            <div className="response">
+              {questions[questionNumber].responses[0][3]}
+            </div>
+          </div>
+          <div className="responseGroup">
+            <div className="response">
+              {questions[questionNumber].responses[1][0]}
+            </div>
+            <div className="response">
+              {questions[questionNumber].responses[1][1]}
+            </div>
+            <div className="response">
+              {questions[questionNumber].responses[1][2]}
+            </div>
+            <div className="response">
+              {questions[questionNumber].responses[1][3]}
+            </div>
+          </div>
+          <div className="responseGroup">
+            <div className="response">
+              {questions[questionNumber].responses[2][0]}
+            </div>
+            <div className="response">
+              {questions[questionNumber].responses[2][1]}
+            </div>
+            <div className="response">
+              {questions[questionNumber].responses[2][2]}
+            </div>
+            <div className="response">
+              {questions[questionNumber].responses[2][3]}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

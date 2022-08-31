@@ -95,6 +95,7 @@ body {
 
 .syntaxItem {
   display: inline-block;
+  padding: 1vw;
   height: 100%;
   text-align: center;
   vertical-align: middle;
@@ -261,4 +262,41 @@ body {
   padding-top: 50px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.quizContainer {
+  padding-top: 4vw;
+  text-align: center;
+  font-size: 3vw;
+}
+
+.prompt {
+  padding: 4vw 0vw;
+  font-size: 4vw;
+}
+
+.constructedSpanish {
+  padding: 4vw 0vw;
+  font-size: 4vw;
+}
+
+.responseContainer {
+  padding: 4vw 0vw;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.responseGroup {
+  /* background-color: #1c77ff; */
+  padding: 0vw 1vw;
+}
+
+.response {
+  border-radius: 1vw;
+  background-color: #3c158f;
+  padding: 1vw 1vw;
+  margin: 2vw 0vw;
 }

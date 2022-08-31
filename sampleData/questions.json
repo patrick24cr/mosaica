@@ -1,0 +1,92 @@
+[
+  {
+    "english": "I hope you arrive soon",
+    "spanish": "Espero que llegues pronto",
+    "responses": {
+      "0": ["Espero que", "Hablo", "Esperas que", "Hablas"],
+      "1": ["busco", "llegues", "buscamos", "llega"],
+      "2": ["tarde", "despacio", "pronto", "furiosamente"]
+    },
+    "correct": {
+      "0":"0",
+      "1":"1",
+      "2":"2"
+    }
+  },
+  {
+    "english": "She sells it to me",
+    "spanish": "Ella me lo vende",
+    "responses": {
+      "0": ["Ella"],
+      "1": ["le", "la", "me", "te"],
+      "2": ["las", "me", "lo", "le"],
+      "3": ["vendo", "compra", "compro", "vende"]
+    },
+    "correct": {
+      "0":"0",
+      "1":"2",
+      "2":"2",
+      "3":"3"
+    }
+  },
+  {
+    "english": "You must write it",
+    "spanish": "Debes escribirlo",
+    "responses": {
+      "0": ["Debe", "Debes", "Espero que", "Esperes que"],
+      "1": ["escribirlo", "escribirte", "venderlo", "venderte"]
+    },
+    "correct": {
+      "0":"1",
+      "1":"0"
+    }
+  },
+  {
+    "english": "When do they arrive?",
+    "spanish": "¿Cuándo llegan?",
+    "responses": {
+      "0": ["¿Por que", "¿Dónde", "¿Cómo", "¿Cuándo"],
+      "1": ["llegan?", "venden?", "llegas?", "vendes?"]
+    },
+    "correct": {
+      "0":"3",
+      "1":"0"
+    }
+  },
+  {
+    "english": "He must search for it",
+    "spanish": "Debe buscarlo",
+    "responses": {
+      "0": ["Debo", "Busca", "Debe", "Buscas"],
+      "1": ["deberlo", "buscarlo", "deberte", "buscarte"]
+    },
+    "correct": {
+      "0":"2",
+      "1":"1"
+    }
+  },
+  {
+    "english": "I must tell you it",
+    "spanish": "Debo decírtelo",
+    "responses": {
+      "0": ["Hablo", "Debo", "Hablas", "Debes"],
+      "1": ["decírlelo", "decírtelo", "decírmelo", "decírtelo"]
+    },
+    "correct": {
+      "0":"1",
+      "1":"1"
+    }
+  },
+  {
+    "english": "They hope we talk",
+    "spanish": "Esperan que hablemos",
+    "responses": {
+      "0": ["Esperamos que", "Espero que", "Esperan que", "Esperas que"],
+      "1": ["hablamos", "hablemos", "hablan", "hablen"]
+    },
+    "correct": {
+      "0":"2",
+      "1":"1"
+    }
+  }
+  ]

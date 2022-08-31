@@ -6,16 +6,16 @@ function GridInteractable({ scores, selected, setSelected }) {
   const rows = ['1', '2', '3', '4', '5'];
 
   const lessonCategories = {
-    1: 'test 1',
-    2: 'test 2',
-    3: 'test 3',
-    4: 'test 4',
-    5: 'test 5',
-    a: 'test a',
-    b: 'test b',
-    c: 'test c',
-    d: 'test d',
-    e: 'test e',
+    1: 'verb level 1',
+    2: 'verb level 2',
+    3: 'verb level 3',
+    4: 'verb level 4',
+    5: 'verb level 5',
+    a: 'present tense',
+    b: 'preterite tense',
+    c: 'imperfect tense',
+    d: 'future tense',
+    e: 'conditional tense',
   };
 
   const calculatedTileNames = [];
@@ -32,13 +32,13 @@ function GridInteractable({ scores, selected, setSelected }) {
     return Math.min(heightAsLimit, widthAsLimit);
   };
   const labelFontSize = () => {
-    const heightAsLimit = 10 / rows.length;
-    const widthAsLimit = 10 / columns.length;
+    const heightAsLimit = 11 / rows.length;
+    const widthAsLimit = 11 / columns.length;
     return Math.min(heightAsLimit, widthAsLimit);
   };
   const scoreLineHeight = () => 60 / rows.length;
   const verbItemLineHeight = () => 60 / rows.length;
-  const syntaxItemLineHeight = () => 10;
+  // const syntaxItemLineHeight = () => 10;
   // end hard-coded sizing constants
 
   const highlightElements = (e) => {
@@ -69,11 +69,13 @@ function GridInteractable({ scores, selected, setSelected }) {
     }
   };
 
+  // , lineHeight: `${syntaxItemLineHeight()}vw`
+
   return (
     <div className="metaGridContainer">
       <div className="syntaxContainer">
         {columns.map((letter) => (
-          <div key={letter} id={`syntax--${letter}`} className="syntaxItem" style={{ width: `${100 / columns.length}%`, lineHeight: `${syntaxItemLineHeight()}vw`, fontSize: `${labelFontSize()}vw` }}>{lessonCategories[letter] ? lessonCategories[letter] : letter}</div>
+          <div key={letter} id={`syntax--${letter}`} className="syntaxItem" style={{ width: `${100 / columns.length}%`, fontSize: `${labelFontSize()}vw` }}>{lessonCategories[letter] ? lessonCategories[letter] : letter}</div>
         ))}
       </div>
       <div className="verbContainer">
