@@ -70,7 +70,7 @@
     "spanish": "Debo decírtelo",
     "responses": {
       "0": ["Hablo", "Debo", "Hablas", "Debes"],
-      "1": ["decírlelo", "decírtelo", "decírmelo", "decírtelo"]
+      "1": ["decírlelo", "decírtelo", "decírmelo", "decírnoslo"]
     },
     "correct": {
       "0":"1",
