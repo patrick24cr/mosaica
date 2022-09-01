@@ -10,7 +10,7 @@ function TopNavigation() {
   return (
     <div className="navigationButtonsContainer">
       <Link passHref href="/">
-        <div role="button" className="logo">Mosaica</div>
+        <div role="button" className="logo">Logo</div>
       </Link>
       <div className="navBarSpacer" />
       <button className={`button1${isProfile ? ' buttonSelected' : ''}`} type="button" onClick={() => router.push(`/profile/${user.uid}`)}>

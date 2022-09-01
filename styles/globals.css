@@ -237,6 +237,7 @@ body {
   /* box-sizing: border-box; */
   margin-left: 2vw;
   background-color: #2A3880;
+  /* background-color: #1a7897; */
   border: none;
   color: white;
   padding: 1.5vw 4vw;
@@ -300,20 +301,90 @@ body {
 }
 
 .responseButton {
-  border-radius: .5vw;
+  /* opacity: 0; */
+  /* border-radius: .5vw; */
   background-color: #3c158f;
   padding: 1.5vw 3vw;
-  margin: 1.5vw 0vw;
+  margin: 0vw 0vw;
   display: block;
   width: 100%;
+  height: 7vw;
   border: none;
+  /* border-color: black; */
   color: white;
   text-align: center;
-  border-radius: 1vw;
-  letter-spacing: 0.2vw;
+  /* border-radius: 1vw; */
+  letter-spacing: 0.1vw;
   font-family: 'ABeeZee', sans-serif;
+  font-size: 2vw;
+}
+
+.responseButton:nth-child(1) {
+  border-radius: 1vw 1vw 0vw 0vw;
+  animation-name: colorAnimation2;
+  animation-duration: 500ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-delay: 1000ms;
+  animation-fill-mode: both;
+}
+
+.responseButton:nth-child(2) {
+  animation-name: colorAnimation2;
+  animation-duration: 500ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-delay: 1100ms;
+  animation-fill-mode: both;
+}
+
+.responseButton:nth-child(3) {
+  animation-name: colorAnimation2;
+  animation-duration: 500ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-delay: 1200ms;
+  animation-fill-mode: both;
+}
+
+.responseButton:nth-child(4) {
+  animation-name: colorAnimation2;
+  animation-duration: 500ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-delay: 1300ms;
+  animation-fill-mode: both;
+}
+
+.responseButton:nth-child(5) {
+  animation-name: colorAnimation2;
+  animation-duration: 500ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-delay: 1400ms;
+  animation-fill-mode: both;
+}
+
+.responseButton:nth-last-child(1) {
+  border-radius: 0vw 0vw 1vw 1vw;
 }
 
 .responseButtonSelected {
-  background-color: #6e47c3;
+  /* box-shadow:inset 0px 0px 0px 0.2vw rgb(255, 255, 255); */
+  background-color: #582eb3;
+  /* background-color: #1a7897; */
+}
+
+@keyframes colorAnimation2 {
+  0% {
+    color: #3c158f;
+    opacity: 0;
+  }
+  50% {
+    /* color: #1a7897; */
+  }
+  100% {
+    /* color: #ffffff; */
+    opacity: 1;
+  }
 }

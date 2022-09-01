@@ -18,7 +18,7 @@ export default function Lesson() {
   // const [scores, setScores] = useState({});
   // const [firebaseKeys, setFirebaseKeys] = useState({});
   // const [formInput, setFormInput] = useState(initialState);
-  const questionNumber = 5;
+  const questionNumber = 4;
   // useEffect(() => {
   //   getScoresByUid(user.uid).then(setScores);
   //   getScoreFirebaseKeysByUid(user.uid).then(setFirebaseKeys);
@@ -48,11 +48,30 @@ export default function Lesson() {
   //   }
   // };
 
+  const selectedResponses = {};
+
+  const updateResponseHighlight = () => {
+    const responsesToUnhighlight = [];
+    Object.keys(questions[questionNumber].responses).map((key, index) => (
+      questions[questionNumber].responses[key].map((item, index2) => (
+        responsesToUnhighlight.push(`${index}--${index2}`)
+      ))
+    ));
+    responsesToUnhighlight.map((ID) => document.getElementById(ID).classList.remove('responseButtonSelected'));
+
+    const responsesToHighlight = [];
+    Object.keys(selectedResponses).map((key) => (
+      responsesToHighlight.push(`${key}--${selectedResponses[key]}`)
+    ));
+    responsesToHighlight.map((ID) => document.getElementById(ID).classList.add('responseButtonSelected'));
+  };
+
   const handleSelect = (e) => {
     const [column, word] = e.target.id.split('--');
-    console.warn(column, word);
     const wordElement = document.getElementById(e.target.id);
     wordElement.classList.add('responseButtonSelected');
+    selectedResponses[column] = word;
+    updateResponseHighlight();
   };
 
   return (
