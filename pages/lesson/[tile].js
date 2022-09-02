@@ -18,7 +18,7 @@ export default function Lesson() {
   // const [scores, setScores] = useState({});
   // const [firebaseKeys, setFirebaseKeys] = useState({});
   // const [formInput, setFormInput] = useState(initialState);
-  const questionNumber = 4;
+  const questionNumber = 1;
   // useEffect(() => {
   //   getScoresByUid(user.uid).then(setScores);
   //   getScoreFirebaseKeysByUid(user.uid).then(setFirebaseKeys);
@@ -50,7 +50,7 @@ export default function Lesson() {
 
   const selectedResponses = {};
 
-  const updateResponseHighlight = () => {
+  const updateResponseHighlights = () => {
     const responsesToUnhighlight = [];
     Object.keys(questions[questionNumber].responses).map((key, index) => (
       questions[questionNumber].responses[key].map((item, index2) => (
@@ -66,12 +66,49 @@ export default function Lesson() {
     responsesToHighlight.map((ID) => document.getElementById(ID).classList.add('responseButtonSelected'));
   };
 
+  const isResponseComplete = () => {
+    if (Object.keys(questions[questionNumber].correct).length === Object.keys(selectedResponses).length) {
+      return true;
+    }
+    return false;
+  };
+
+  const checkAnswerDisplayCorrection = () => {
+    const isCorrect = Object.keys(questions[questionNumber].correct).every(
+      (key) => Object.prototype.hasOwnProperty.call(selectedResponses, key)
+                  && questions[questionNumber].correct[key] === selectedResponses[key],
+    );
+
+    const wrongResponses = [];
+    Object.keys(questions[questionNumber].correct).forEach(
+      (key) => {
+        if (!(Object.prototype.hasOwnProperty.call(selectedResponses, key)
+        && questions[questionNumber].correct[key] === selectedResponses[key])) {
+          wrongResponses.push(`${key}--${selectedResponses[key]}`);
+        }
+      },
+    );
+
+    const responsesToCircle = [];
+    Object.keys(questions[questionNumber].correct).map((key) => (
+      responsesToCircle.push(`${key}--${questions[questionNumber].correct[key]}`)
+    ));
+    responsesToCircle.map((ID) => document.getElementById(ID).classList.add('responseButtonCorrect'));
+
+    document.getElementById('constructedSpanish').classList.remove('hiddenLessonElement');
+    document.getElementById('afterQuestionButtons').classList.remove('hiddenLessonElement');
+    document.getElementById('responseContainer').classList.add('disabledLessonElement');
+    wrongResponses.forEach((ID) => document.getElementById(ID).classList.add('responseButtonWrong'));
+    console.warn(isCorrect);
+  };
+
   const handleSelect = (e) => {
     const [column, word] = e.target.id.split('--');
-    const wordElement = document.getElementById(e.target.id);
-    wordElement.classList.add('responseButtonSelected');
     selectedResponses[column] = word;
-    updateResponseHighlight();
+    updateResponseHighlights();
+    if (isResponseComplete()) {
+      checkAnswerDisplayCorrection();
+    }
   };
 
   return (
@@ -80,17 +117,27 @@ export default function Lesson() {
       <div className="quizContainer">
         <div className="questionCounter">Lesson: {tile}<br />Question: {questionNumber + 1} / {questions.length}</div>
         <div className="prompt">{questions[questionNumber].english}</div>
-        {/* <div className="constructedSpanish">{questions[questionNumber].spanish}</div> */}
-        <div className="responseContainer">
-          {Object.keys(questions[questionNumber].responses).map((column, columnIndex) => (
-            <div className="responseGroup" key={column}>
-              {questions[questionNumber].responses[column].map((word, wordIndex) => (
-                <button type="button" className="responseButton" key={word} id={`${columnIndex}--${wordIndex}`} onClick={(e) => handleSelect(e)}>
-                  {word}
-                </button>
-              ))}
-            </div>
-          ))}
+        <div className="constructedSpanish hiddenLessonElement" id="constructedSpanish">{questions[questionNumber].spanish}</div>
+        <div className="lessonButtonContainer">
+          <div className="responseContainer" id="responseContainer">
+            {Object.keys(questions[questionNumber].responses).map((column, columnIndex) => (
+              <div className="responseGroup" key={column}>
+                {questions[questionNumber].responses[column].map((word, wordIndex) => (
+                  <button type="button" className="responseButton" key={word} id={`${columnIndex}--${wordIndex}`} onClick={(e) => handleSelect(e)}>
+                    {word}
+                  </button>
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className="afterQuestionButtons hiddenLessonElement" id="afterQuestionButtons">
+            <button type="button" className="genericLessonButton" onClick={(e) => console.warn(e)}>
+              Next Question
+            </button>
+            <button type="button" className="genericLessonButton" onClick={(e) => console.warn(e)}>
+              Report Question
+            </button>
+          </div>
         </div>
       </div>
     </div>

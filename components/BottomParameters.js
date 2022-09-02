@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 function BottomParameters({ selected }) {
   const router = useRouter();
   return (
-    <div className="lessonButtonsContainer">
+    <div className="lessonParameterButtons">
       <button className="button1" type="button" onClick={() => router.push(`/lesson/${selected}`)}>
         Start
       </button>
