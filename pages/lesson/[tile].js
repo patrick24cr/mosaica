@@ -1,10 +1,11 @@
 // import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import TopNavigation from '../../components/TopNavigation';
-// import { useAuth } from '../../utils/context/authContext';
-// import {
-//   createScore, getScoreFirebaseKeysByUid, getScoresByUid, updateScoreByFirebaseKey,
-// } from '../../api/scores';
+import { useAuth } from '../../utils/context/authContext';
+import {
+  createScore, getScoreFirebaseKeysByUid, getScoresByUid, updateScoreByFirebaseKey,
+} from '../../api/scores';
 import questions from '../../sampleData/questions.json';
 
 // const initialState = {
@@ -12,17 +13,19 @@ import questions from '../../sampleData/questions.json';
 // };
 
 export default function Lesson() {
-  // const { user } = useAuth();
+  const { user } = useAuth();
   const router = useRouter();
   const { tile } = router.query;
-  // const [scores, setScores] = useState({});
-  // const [firebaseKeys, setFirebaseKeys] = useState({});
+  const [questionNumber, setQuestionNumber] = useState(0);
+  const selectedResponses = {};
+  const [numberCorrect, setNumberCorrect] = useState(0);
+  const [scores, setScores] = useState({});
+  const [firebaseKeys, setFirebaseKeys] = useState({});
   // const [formInput, setFormInput] = useState(initialState);
-  const questionNumber = 1;
-  // useEffect(() => {
-  //   getScoresByUid(user.uid).then(setScores);
-  //   getScoreFirebaseKeysByUid(user.uid).then(setFirebaseKeys);
-  // }, [user.uid]);
+  useEffect(() => {
+    getScoresByUid(user.uid).then(setScores);
+    getScoreFirebaseKeysByUid(user.uid).then(setFirebaseKeys);
+  }, [user.uid]);
 
   // const handleChange = (e) => {
   //   const { name, value } = e.target;
@@ -48,7 +51,42 @@ export default function Lesson() {
   //   }
   // };
 
-  const selectedResponses = {};
+  const calculateAndWriteScore = () => {
+    if (scores[tile]) {
+      const payload = {
+        score: Math.ceil((parseInt(scores[tile], 10) + parseInt(numberCorrect, 10)) / 2),
+      };
+      updateScoreByFirebaseKey(firebaseKeys[tile], payload).then(() => router.push('/'));
+    } else {
+      const payload = {
+        tile,
+        uid: user.uid,
+        score: Math.ceil((parseInt(numberCorrect, 10)) / 2),
+      };
+      createScore(payload).then(() => router.push('/'));
+    }
+  };
+
+  const showReport = () => {
+    document.getElementById('quizContainer').classList.add('displayNone');
+    document.getElementById('reportContainer').classList.remove('displayNone');
+  };
+
+  const advanceToNextQuestion = () => {
+    const nextQuestionTasks = () => {
+      if (questionNumber === questions.length - 1) {
+        showReport();
+        return;
+      }
+      setQuestionNumber(questionNumber + 1);
+      document.getElementById('afterQuestionButtons').classList.add('hiddenLessonElement');
+      document.getElementById('responseContainer').classList.remove('disabledLessonElement');
+      setTimeout(document.getElementById('quizContainer').classList.remove('quizContainerFaded'), 500);
+    };
+    document.getElementById('constructedSpanish').classList.add('hiddenLessonElement');
+    document.getElementById('quizContainer').classList.add('quizContainerFaded');
+    setTimeout(nextQuestionTasks, 500);
+  };
 
   const updateResponseHighlights = () => {
     const responsesToUnhighlight = [];
@@ -99,7 +137,9 @@ export default function Lesson() {
     document.getElementById('afterQuestionButtons').classList.remove('hiddenLessonElement');
     document.getElementById('responseContainer').classList.add('disabledLessonElement');
     wrongResponses.forEach((ID) => document.getElementById(ID).classList.add('responseButtonWrong'));
-    console.warn(isCorrect);
+    if (isCorrect) {
+      setNumberCorrect(numberCorrect + 1);
+    }
   };
 
   const handleSelect = (e) => {
@@ -114,7 +154,7 @@ export default function Lesson() {
   return (
     <div className="container1">
       <TopNavigation />
-      <div className="quizContainer">
+      <div className="quizContainer" id="quizContainer">
         <div className="questionCounter">Lesson: {tile}<br />Question: {questionNumber + 1} / {questions.length}</div>
         <div className="prompt">{questions[questionNumber].english}</div>
         <div className="constructedSpanish hiddenLessonElement" id="constructedSpanish">{questions[questionNumber].spanish}</div>
@@ -131,7 +171,7 @@ export default function Lesson() {
             ))}
           </div>
           <div className="afterQuestionButtons hiddenLessonElement" id="afterQuestionButtons">
-            <button type="button" className="genericLessonButton" onClick={(e) => console.warn(e)}>
+            <button type="button" className="genericLessonButton" onClick={() => advanceToNextQuestion()}>
               Next Question
             </button>
             <button type="button" className="genericLessonButton" onClick={(e) => console.warn(e)}>
@@ -139,6 +179,12 @@ export default function Lesson() {
             </button>
           </div>
         </div>
+      </div>
+      <div className="reportContainer displayNone" id="reportContainer">
+        Number correct: {numberCorrect} <br />
+        <button type="button" className="genericLessonButton" onClick={() => calculateAndWriteScore()}>
+          Write to database
+        </button>
       </div>
     </div>
   );

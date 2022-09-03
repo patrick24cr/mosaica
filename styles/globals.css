@@ -269,6 +269,11 @@ body {
   padding-top: 4vw;
   text-align: center;
   font-size: 3vw;
+  transition: opacity, .5s;
+}
+
+.quizContainerFaded {
+  opacity: 0;
 }
 
 .questionCounter {
@@ -361,7 +366,7 @@ body {
   animation-duration: 500ms;
   animation-iteration-count: 1;
   animation-timing-function: linear;
-  animation-delay: 1000ms;
+  animation-delay: 500ms;
   animation-fill-mode: both;
 }
 
@@ -370,7 +375,7 @@ body {
   animation-duration: 500ms;
   animation-iteration-count: 1;
   animation-timing-function: linear;
-  animation-delay: 1100ms;
+  animation-delay: 600ms;
   animation-fill-mode: both;
 }
 
@@ -379,7 +384,7 @@ body {
   animation-duration: 500ms;
   animation-iteration-count: 1;
   animation-timing-function: linear;
-  animation-delay: 1200ms;
+  animation-delay: 700ms;
   animation-fill-mode: both;
 }
 
@@ -388,7 +393,7 @@ body {
   animation-duration: 500ms;
   animation-iteration-count: 1;
   animation-timing-function: linear;
-  animation-delay: 1300ms;
+  animation-delay: 800ms;
   animation-fill-mode: both;
 }
 
@@ -397,7 +402,7 @@ body {
   animation-duration: 500ms;
   animation-iteration-count: 1;
   animation-timing-function: linear;
-  animation-delay: 1400ms;
+  animation-delay: 900ms;
   animation-fill-mode: both;
 }
 
@@ -442,4 +447,15 @@ body {
     /* color: #ffffff; */
     opacity: 1;
   }
+}
+
+.reportContainer {
+  text-align: center;
+  padding-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.displayNone {
+  display: none;
 }
