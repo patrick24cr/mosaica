@@ -1,11 +1,11 @@
 // import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TopNavigation from '../../components/TopNavigation';
-// import { useAuth } from '../../utils/context/authContext';
-// import {
-//   createScore, getScoreFirebaseKeysByUid, getScoresByUid, updateScoreByFirebaseKey,
-// } from '../../api/scores';
+import { useAuth } from '../../utils/context/authContext';
+import {
+  createScore, getScoreFirebaseKeysByUid, getScoresByUid, updateScoreByFirebaseKey,
+} from '../../api/scores';
 import questions from '../../sampleData/questions.json';
 
 // const initialState = {
@@ -13,19 +13,19 @@ import questions from '../../sampleData/questions.json';
 // };
 
 export default function Lesson() {
-  // const { user } = useAuth();
+  const { user } = useAuth();
   const router = useRouter();
   const { tile } = router.query;
   const [questionNumber, setQuestionNumber] = useState(0);
   const selectedResponses = {};
-  let numberCorrect = 0;
-  // const [scores, setScores] = useState({});
-  // const [firebaseKeys, setFirebaseKeys] = useState({});
+  const [numberCorrect, setNumberCorrect] = useState(0);
+  const [scores, setScores] = useState({});
+  const [firebaseKeys, setFirebaseKeys] = useState({});
   // const [formInput, setFormInput] = useState(initialState);
-  // useEffect(() => {
-  //   getScoresByUid(user.uid).then(setScores);
-  //   getScoreFirebaseKeysByUid(user.uid).then(setFirebaseKeys);
-  // }, [user.uid]);
+  useEffect(() => {
+    getScoresByUid(user.uid).then(setScores);
+    getScoreFirebaseKeysByUid(user.uid).then(setFirebaseKeys);
+  }, [user.uid]);
 
   // const handleChange = (e) => {
   //   const { name, value } = e.target;
@@ -51,17 +51,34 @@ export default function Lesson() {
   //   }
   // };
 
-  const showReport = () => {
+  const calculateAndWriteScore = () => {
+    if (scores[tile]) {
+      const payload = {
+        score: Math.ceil((parseInt(scores[tile], 10) + parseInt(numberCorrect, 10)) / 2),
+      };
+      updateScoreByFirebaseKey(firebaseKeys[tile], payload).then(() => router.push('/'));
+    } else {
+      const payload = {
+        tile,
+        uid: user.uid,
+        score: Math.ceil((parseInt(numberCorrect, 10)) / 2),
+      };
+      createScore(payload).then(() => router.push('/'));
+    }
+  };
 
-  }
+  const showReport = () => {
+    document.getElementById('quizContainer').classList.add('displayNone');
+    document.getElementById('reportContainer').classList.remove('displayNone');
+  };
 
   const advanceToNextQuestion = () => {
     const nextQuestionTasks = () => {
-      setQuestionNumber(questionNumber + 1);
-      if (questionNumber > questions.length) {
+      if (questionNumber === questions.length - 1) {
         showReport();
         return;
       }
+      setQuestionNumber(questionNumber + 1);
       document.getElementById('afterQuestionButtons').classList.add('hiddenLessonElement');
       document.getElementById('responseContainer').classList.remove('disabledLessonElement');
       setTimeout(document.getElementById('quizContainer').classList.remove('quizContainerFaded'), 500);
@@ -121,8 +138,7 @@ export default function Lesson() {
     document.getElementById('responseContainer').classList.add('disabledLessonElement');
     wrongResponses.forEach((ID) => document.getElementById(ID).classList.add('responseButtonWrong'));
     if (isCorrect) {
-      numberCorrect += 1;
-      console.warn(numberCorrect);
+      setNumberCorrect(numberCorrect + 1);
     }
   };
 
@@ -163,6 +179,12 @@ export default function Lesson() {
             </button>
           </div>
         </div>
+      </div>
+      <div className="reportContainer displayNone" id="reportContainer">
+        Number correct: {numberCorrect} <br />
+        <button type="button" className="genericLessonButton" onClick={() => calculateAndWriteScore()}>
+          Write to database
+        </button>
       </div>
     </div>
   );

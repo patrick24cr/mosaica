@@ -57,7 +57,7 @@
     "english": "He must search for it",
     "spanish": "Debe buscarlo",
     "responses": {
-      "0": ["Debo", "Busca", "Debe", "Buscas"],
+      "0": ["Debemos", "Busca", "Debe", "Buscas"],
       "1": ["deberlo", "buscarlo", "deberte", "buscarte"]
     },
     "correct": {
