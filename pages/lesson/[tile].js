@@ -21,35 +21,12 @@ export default function Lesson() {
   const [numberCorrect, setNumberCorrect] = useState(0);
   const [scores, setScores] = useState({});
   const [firebaseKeys, setFirebaseKeys] = useState({});
+  let responseTimer = {};
   // const [formInput, setFormInput] = useState(initialState);
   useEffect(() => {
     getScoresByUid(user.uid).then(setScores);
     getScoreFirebaseKeysByUid(user.uid).then(setFirebaseKeys);
   }, [user.uid]);
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormInput((prevState) => ({
-  //     ...prevState,
-  //     [name]: value,
-  //   }));
-  // };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (scores[tile]) {
-  //     const payload = {
-  //       score: Math.ceil((parseInt(scores[tile], 10) + parseInt(formInput.score, 10)) / 2),
-  //     };
-  //     updateScoreByFirebaseKey(firebaseKeys[tile], payload).then(() => router.push('/'));
-  //   } else {
-  //     const payload = {
-  //       tile,
-  //       uid: user.uid,
-  //       score: Math.ceil((parseInt(formInput.score, 10)) / 2),
-  //     };
-  //     createScore(payload).then(() => router.push('/'));
-  //   }
-  // };
 
   const calculateAndWriteScore = () => {
     if (scores[tile]) {
@@ -112,6 +89,7 @@ export default function Lesson() {
   };
 
   const checkAnswerDisplayCorrection = () => {
+    clearInterval(responseTimer);
     const isCorrect = Object.keys(questions[questionNumber].correct).every(
       (key) => Object.prototype.hasOwnProperty.call(selectedResponses, key)
                   && questions[questionNumber].correct[key] === selectedResponses[key],
@@ -136,7 +114,7 @@ export default function Lesson() {
     document.getElementById('constructedSpanish').classList.remove('hiddenLessonElement');
     document.getElementById('afterQuestionButtons').classList.remove('hiddenLessonElement');
     document.getElementById('responseContainer').classList.add('disabledLessonElement');
-    wrongResponses.forEach((ID) => document.getElementById(ID).classList.add('responseButtonWrong'));
+    wrongResponses.forEach((ID) => document.getElementById(ID)?.classList.add('responseButtonWrong'));
     if (isCorrect) {
       setNumberCorrect(numberCorrect + 1);
     }
@@ -151,13 +129,62 @@ export default function Lesson() {
     }
   };
 
+  useEffect(() => {
+    const progressBar = document.getElementById('progressBar');
+    let timeElapsed = 0;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    responseTimer = setInterval(() => {
+      if (timeElapsed < 6) {
+        timeElapsed += 1;
+        console.warn(timeElapsed);
+      } else {
+        clearInterval(responseTimer);
+        checkAnswerDisplayCorrection();
+      }
+      switch (timeElapsed) {
+        case (1):
+          progressBar.classList = '';
+          progressBar.classList.add('progressBar');
+          progressBar.classList.add('progressBar0');
+          break;
+        case (2):
+          progressBar.classList.remove('progressBar0');
+          progressBar.classList.add('progressBar1');
+          break;
+        case (3):
+          progressBar.classList.remove('progressBar1');
+          progressBar.classList.add('progressBar2');
+          break;
+        case (4):
+          progressBar.classList.remove('progressBar2');
+          progressBar.classList.add('progressBar3');
+          break;
+        case (5):
+          progressBar.classList.remove('progressBar3');
+          progressBar.classList.add('progressBar4');
+          break;
+        case (6):
+          progressBar.classList.remove('progressBar4');
+          progressBar.classList.add('progressBar5');
+          break;
+        default:
+          // code block
+      }
+    }, 1000);
+    return () => clearInterval(responseTimer);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [questionNumber]);
+
   return (
     <div className="container1">
       <TopNavigation />
       <div className="quizContainer" id="quizContainer">
         <div className="questionCounter">Lesson: {tile}<br />Question: {questionNumber + 1} / {questions.length}</div>
         <div className="prompt">{questions[questionNumber].english}</div>
-        <div className="constructedSpanish hiddenLessonElement" id="constructedSpanish">{questions[questionNumber].spanish}</div>
+        <div className="constructedSpanish hiddenLessonElement" id="constructedSpanish">
+          {questions[questionNumber].spanish}
+        </div>
+        <div className="progressBar progressBar5" id="progressBar" />
         <div className="lessonButtonContainer">
           <div className="responseContainer" id="responseContainer">
             {Object.keys(questions[questionNumber].responses).map((column, columnIndex) => (
