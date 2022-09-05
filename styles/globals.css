@@ -289,31 +289,31 @@ body {
 .progressBar {
   border-radius: 1vw;
   background-color: #0394c4;
-  height: 1vw;
+  height: 2vw;
   margin-left: auto;
   margin-right: auto;
   transition: width, .5s;
   transition-timing-function: linear;
 }
 
-.progressBar00 {
+.progressBar50 {
   /* background-color: #4354a9; */
   width: 100%;
 }
 
-.progressBar05 {
+.progressBar45 {
   width: 90%;
 }
 
-.progressBar10 {
+.progressBar40 {
   width: 80%;
 }
 
-.progressBar15 {
+.progressBar35 {
   width: 70%;
 }
 
-.progressBar20 {
+.progressBar30 {
   width: 60%;
 }
 
@@ -321,23 +321,23 @@ body {
   width: 50%;
 }
 
-.progressBar30 {
+.progressBar20 {
   width: 40%;
 }
 
-.progressBar35 {
+.progressBar15 {
   width: 30%;
 }
 
-.progressBar40 {
+.progressBar10 {
   width: 20%;
 }
 
-.progressBar45 {
+.progressBar05 {
   width: 10%;
 }
 
-.progressBar50 {
+.progressBar00 {
   width: 0%;
 }
 
