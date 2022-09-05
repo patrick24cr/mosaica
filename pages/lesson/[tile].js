@@ -16,7 +16,7 @@ export default function Lesson() {
   const [numberCorrect, setNumberCorrect] = useState(0);
   const [scores, setScores] = useState({});
   const [firebaseKeys, setFirebaseKeys] = useState({});
-  let responseTimer = {};
+  const [hasUserResponded, setHasUserResponded] = useState(false);
   useEffect(() => {
     getScoresByUid(user.uid).then(setScores);
     getScoreFirebaseKeysByUid(user.uid).then(setFirebaseKeys);
@@ -49,6 +49,7 @@ export default function Lesson() {
         showReport();
         return;
       }
+      setHasUserResponded(false);
       setQuestionNumber(questionNumber + 1);
       // these visual changes are instantaneous and can happen during the container fade
       document.getElementById('afterQuestionButtons').classList.add('hiddenLessonElement');
@@ -56,7 +57,8 @@ export default function Lesson() {
       setTimeout(document.getElementById('quizContainer').classList.remove('quizContainerFaded'), 500);
     };
     // these visual changes are on CSS transitions and need to be started early
-    document.getElementById('progressBar').classList.add('progressBar50');
+    document.getElementById('progressBar').classList = 'progressBar';
+    document.getElementById('progressBar').classList.add('progressBar00');
     document.getElementById('constructedSpanish').classList.add('hiddenLessonElement');
     document.getElementById('quizContainer').classList.add('quizContainerFaded');
     setTimeout(nextQuestionTasks, 500);
@@ -86,7 +88,6 @@ export default function Lesson() {
   };
 
   const checkAnswerDisplayCorrection = () => {
-    clearInterval(responseTimer);
     const isCorrect = Object.keys(questions[questionNumber].correct).every(
       (key) => Object.prototype.hasOwnProperty.call(selectedResponses, key)
                   && questions[questionNumber].correct[key] === selectedResponses[key],
@@ -122,6 +123,7 @@ export default function Lesson() {
     selectedResponses[column] = word;
     updateResponseHighlights();
     if (isResponseComplete()) {
+      setHasUserResponded(true);
       checkAnswerDisplayCorrection();
     }
   };
@@ -132,59 +134,61 @@ export default function Lesson() {
     const progressBar = document.getElementById('progressBar');
     let timeElapsed = 0;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    responseTimer = setInterval(() => {
+    const responseTimer = setInterval(() => {
+      console.warn('interval still running');
       if (timeElapsed < allowedTime) {
         timeElapsed += 0.5;
-        console.warn(timeElapsed);
       } else {
         clearInterval(responseTimer);
         checkAnswerDisplayCorrection();
       }
+      if (hasUserResponded) {
+        clearInterval(responseTimer);
+      }
       switch (timeElapsed) {
-        case (allowedTime - 5.5):
-          progressBar.classList = '';
-          progressBar.classList.add('progressBar');
-          progressBar.classList.add('progressBar00');
-          break;
         case (allowedTime - 5):
           progressBar.classList.remove('progressBar00');
-          progressBar.classList.add('progressBar05');
+          progressBar.classList.add('progressBar50');
           break;
         case (allowedTime - 4.5):
-          progressBar.classList.remove('progressBar05');
-          progressBar.classList.add('progressBar10');
-          break;
-        case (allowedTime - 4):
-          progressBar.classList.remove('progressBar10');
-          progressBar.classList.add('progressBar15');
-          break;
-        case (allowedTime - 3.5):
-          progressBar.classList.remove('progressBar15');
-          progressBar.classList.add('progressBar20');
-          break;
-        case (allowedTime - 3):
-          progressBar.classList.remove('progressBar20');
-          progressBar.classList.add('progressBar25');
-          break;
-        case (allowedTime - 2.5):
-          progressBar.classList.remove('progressBar25');
-          progressBar.classList.add('progressBar30');
-          break;
-        case (allowedTime - 2):
-          progressBar.classList.remove('progressBar30');
-          progressBar.classList.add('progressBar35');
-          break;
-        case (allowedTime - 1.5):
-          progressBar.classList.remove('progressBar35');
-          progressBar.classList.add('progressBar40');
-          break;
-        case (allowedTime - 1):
-          progressBar.classList.remove('progressBar40');
+          progressBar.classList.remove('progressBar50');
           progressBar.classList.add('progressBar45');
           break;
-        case (allowedTime - 0.5):
+        case (allowedTime - 4):
           progressBar.classList.remove('progressBar45');
-          progressBar.classList.add('progressBar50');
+          progressBar.classList.add('progressBar40');
+          break;
+        case (allowedTime - 3.5):
+          progressBar.classList.remove('progressBar40');
+          progressBar.classList.add('progressBar35');
+          break;
+        case (allowedTime - 3):
+          progressBar.classList.remove('progressBar35');
+          progressBar.classList.add('progressBar30');
+          break;
+        case (allowedTime - 2.5):
+          progressBar.classList.remove('progressBar30');
+          progressBar.classList.add('progressBar25');
+          break;
+        case (allowedTime - 2):
+          progressBar.classList.remove('progressBar25');
+          progressBar.classList.add('progressBar20');
+          break;
+        case (allowedTime - 1.5):
+          progressBar.classList.remove('progressBar20');
+          progressBar.classList.add('progressBar15');
+          break;
+        case (allowedTime - 1):
+          progressBar.classList.remove('progressBar15');
+          progressBar.classList.add('progressBar10');
+          break;
+        case (allowedTime - 0.5):
+          progressBar.classList.remove('progressBar10');
+          progressBar.classList.add('progressBar05');
+          break;
+        case (allowedTime):
+          progressBar.classList.remove('progressBar05');
+          progressBar.classList.add('progressBar00');
           break;
         default:
           // code block
@@ -192,7 +196,7 @@ export default function Lesson() {
     }, 500);
     return () => clearInterval(responseTimer);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [questionNumber]);
+  }, [questionNumber, hasUserResponded]);
 
   return (
     <div className="container1">
@@ -203,7 +207,7 @@ export default function Lesson() {
         <div className="constructedSpanish hiddenLessonElement" id="constructedSpanish">
           {questions[questionNumber].spanish}
         </div>
-        <div className="progressBar progressBar50" id="progressBar" />
+        <div className="progressBar progressBar00" id="progressBar" />
         <div className="lessonButtonContainer">
           <div className="responseContainer" id="responseContainer">
             {Object.keys(questions[questionNumber].responses).map((column, columnIndex) => (
