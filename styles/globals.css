@@ -292,32 +292,52 @@ body {
   height: 1vw;
   margin-left: auto;
   margin-right: auto;
-  transition: width, 1s;
+  transition: width, .5s;
   transition-timing-function: linear;
 }
 
-.progressBar0 {
+.progressBar00 {
   /* background-color: #4354a9; */
   width: 100%;
 }
 
-.progressBar1 {
+.progressBar05 {
+  width: 90%;
+}
+
+.progressBar10 {
   width: 80%;
 }
 
-.progressBar2 {
+.progressBar15 {
+  width: 70%;
+}
+
+.progressBar20 {
   width: 60%;
 }
 
-.progressBar3 {
+.progressBar25 {
+  width: 50%;
+}
+
+.progressBar30 {
   width: 40%;
 }
 
-.progressBar4 {
+.progressBar35 {
+  width: 30%;
+}
+
+.progressBar40 {
   width: 20%;
 }
 
-.progressBar5 {
+.progressBar45 {
+  width: 10%;
+}
+
+.progressBar50 {
   width: 0%;
 }
 
