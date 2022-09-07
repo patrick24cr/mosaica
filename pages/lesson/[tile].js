@@ -54,6 +54,8 @@ export default function Lesson() {
       // these visual changes are instantaneous and can happen during the container fade
       document.getElementById('afterQuestionButtons').classList.add('hiddenLessonElement');
       document.getElementById('responseContainer').classList.remove('disabledLessonElement');
+      document.getElementById('postFeedback').classList.add('displayNone');
+      document.getElementById('afterQuestionButtons').classList.remove('displayNone');
       setTimeout(document.getElementById('quizContainer').classList.remove('quizContainerFaded'), 500);
     };
     // these visual changes are on CSS transitions and need to be started early
@@ -130,12 +132,12 @@ export default function Lesson() {
 
   useEffect(() => {
     // progress bar and timer
+    // allowedTime must be 6 or greater for the progress bar to function properly
     const allowedTime = 7;
     const progressBar = document.getElementById('progressBar');
     let timeElapsed = 0;
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const responseTimer = setInterval(() => {
-      console.warn('interval still running');
       if (timeElapsed < allowedTime) {
         timeElapsed += 0.5;
       } else {
@@ -198,6 +200,25 @@ export default function Lesson() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questionNumber, hasUserResponded]);
 
+  const showBadQuestionForm = () => {
+    document.getElementById('afterQuestionButtons').classList.add('displayNone');
+    document.getElementById('badQuestionContainer').classList.remove('displayNone');
+  };
+
+  const hideBadQuestionForm = () => {
+    document.getElementById('badQuestionContainer').classList.add('displayNone');
+    document.getElementById('postFeedback').classList.remove('displayNone');
+  };
+
+  // const postFeedbackNextQuestion = () => {
+  //   advanceToNextQuestion();
+  // };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    hideBadQuestionForm();
+  };
+
   return (
     <div className="container1">
       <TopNavigation />
@@ -224,9 +245,33 @@ export default function Lesson() {
             <button type="button" className="genericLessonButton" onClick={() => advanceToNextQuestion()}>
               Next Question
             </button>
-            <button type="button" className="genericLessonButton" onClick={(e) => console.warn(e)}>
+            <button type="button" className="genericLessonButton" onClick={() => showBadQuestionForm()}>
               Report Question
             </button>
+          </div>
+          <div className="badQuestionContainer displayNone" id="badQuestionContainer">
+            <form className="badQuestionForm" onSubmit={handleSubmit}>
+              <div className="badQuestionText">Where is the problem?</div>
+              <div className="badQuestionRadio">
+                <input type="radio" id="child" name="age" value="child" />
+                <label htmlFor="child">English</label>
+                <input type="radio" id="adult" name="age" value="adult" />
+                <label htmlFor="adult">Spanish</label>
+                <input type="radio" id="senior" name="age" value="senior" />
+                <label htmlFor="senior">Both</label>
+              </div>
+              <div><input className="badQuestionInput" type="text" id="score" placeholder="Describe the issue" name="score" value={console.warn('formInput.score')} onChange={console.warn('handleChange')} required /></div>
+              <div className="badQuestionText2">The question text will automatically be included with your feedback.</div>
+              <button type="submit" className="genericLessonButton">
+                Submit feedback
+              </button>
+            </form>
+          </div>
+          <div className="postFeedback displayNone" id="postFeedback">
+            <button type="button" className="genericLessonButton" onClick={() => advanceToNextQuestion()}>
+              Next Question
+            </button>
+            <div className="badQuestionText2">Thank you for helping make Mosaica better.</div>
           </div>
         </div>
       </div>
