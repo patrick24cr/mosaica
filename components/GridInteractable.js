@@ -12,10 +12,10 @@ function GridInteractable({ scores, selected, setSelected }) {
     4: 'verb level 4',
     5: 'verb level 5',
     a: 'present tense',
-    b: 'preterite tense',
-    c: 'imperfect tense',
-    d: 'future tense',
-    e: 'conditional tense',
+    b: 'past tense',
+    c: 'future tense',
+    d: 'conditional tense',
+    e: 'subjunctive tense',
   };
 
   const calculatedTileNames = [];
@@ -27,17 +27,17 @@ function GridInteractable({ scores, selected, setSelected }) {
 
   // begin hard-coded sizing constants
   const scoreFontSize = () => {
-    const heightAsLimit = 20 / rows.length;
-    const widthAsLimit = 20 / columns.length;
+    const heightAsLimit = 25 / rows.length;
+    const widthAsLimit = 25 / columns.length;
     return Math.min(heightAsLimit, widthAsLimit);
   };
   const labelFontSize = () => {
-    const heightAsLimit = 11 / rows.length;
-    const widthAsLimit = 11 / columns.length;
+    const heightAsLimit = 13 / rows.length;
+    const widthAsLimit = 13 / columns.length;
     return Math.min(heightAsLimit, widthAsLimit);
   };
-  const scoreLineHeight = () => 60 / rows.length;
-  const verbItemLineHeight = () => 60 / rows.length;
+  const scoreLineHeight = () => 70 / rows.length;
+  const verbItemLineHeight = () => 70 / rows.length;
   // const syntaxItemLineHeight = () => 10;
   // end hard-coded sizing constants
 
