@@ -6,6 +6,13 @@ import {
   createScore, getScoreFirebaseKeysByUid, getScoresByUid, updateScoreByFirebaseKey,
 } from '../../api/scores';
 import questions from '../../sampleData/questions.json';
+import createReport from '../../api/badQuestions';
+
+const initialState = {
+  problemWithEnglish: false,
+  problemWithSpanish: false,
+  problemDescription: '',
+};
 
 export default function Lesson() {
   const { user } = useAuth();
@@ -17,7 +24,10 @@ export default function Lesson() {
   const [scores, setScores] = useState({});
   const [firebaseKeys, setFirebaseKeys] = useState({});
   const [hasUserResponded, setHasUserResponded] = useState(false);
+  const [formInput, setFormInput] = useState(initialState);
+
   useEffect(() => {
+    // get info that API call will need at end of lesson to write new score
     getScoresByUid(user.uid).then(setScores);
     getScoreFirebaseKeysByUid(user.uid).then(setFirebaseKeys);
   }, [user.uid]);
@@ -51,7 +61,7 @@ export default function Lesson() {
       }
       setHasUserResponded(false);
       setQuestionNumber(questionNumber + 1);
-      // these visual changes are instantaneous and can happen during the container fade
+      // these visual changes are instantaneous and can happen during the instant that the container is fully faded
       document.getElementById('afterQuestionButtons').classList.add('hiddenLessonElement');
       document.getElementById('responseContainer').classList.remove('disabledLessonElement');
       document.getElementById('postFeedback').classList.add('displayNone');
@@ -217,6 +227,25 @@ export default function Lesson() {
   const handleSubmit = (e) => {
     e.preventDefault();
     hideBadQuestionForm();
+    createReport(formInput).then(setFormInput(initialState));
+    document.getElementById('problemWithSpanish').removeAttribute('checked');
+    document.getElementById('problemWithEnglish').removeAttribute('checked');
+  };
+
+  const handleChange = (e) => {
+    const { name } = e.target;
+    let { value } = e.target;
+    if (name === 'problemWithEnglish') {
+      value = !formInput.problemWithEnglish;
+    }
+    if (name === 'problemWithSpanish') {
+      value = !formInput.problemWithSpanish;
+    }
+    setFormInput((prevState) => ({
+      ...prevState,
+      [name]: value,
+      question: questions[questionNumber],
+    }));
   };
 
   return (
@@ -253,15 +282,13 @@ export default function Lesson() {
             <form className="badQuestionForm" onSubmit={handleSubmit}>
               <div className="badQuestionText">Where is the problem?</div>
               <div className="badQuestionRadio">
-                <input type="radio" id="child" name="age" value="child" />
-                <label htmlFor="child">English</label>
-                <input type="radio" id="adult" name="age" value="adult" />
-                <label htmlFor="adult">Spanish</label>
-                <input type="radio" id="senior" name="age" value="senior" />
-                <label htmlFor="senior">Both</label>
+                <input type="checkbox" id="problemWithEnglish" name="problemWithEnglish" checked={formInput.problemWithEnglish} value="placeholder" onChange={handleChange} />
+                <label htmlFor="problemWithEnglish">English</label>
+                <input type="checkbox" id="problemWithSpanish" name="problemWithSpanish" checked={formInput.problemWithSpanish} value="placeholder" onChange={handleChange} />
+                <label htmlFor="problemWithSpanish">Spanish</label>
               </div>
-              <div><input className="badQuestionInput" type="text" id="score" placeholder="Describe the issue" name="score" value={console.warn('formInput.score')} onChange={console.warn('handleChange')} required /></div>
-              <div className="badQuestionText2">The question text will automatically be included with your feedback.</div>
+              <div><input className="badQuestionInput" type="text" id="problemDescription" placeholder="Describe the issue" name="problemDescription" value={formInput.problemDescription} onChange={handleChange} required /></div>
+              <div className="badQuestionText2">The text of the questions/answers will automatically be included with your feedback.</div>
               <button type="submit" className="genericLessonButton">
                 Submit feedback
               </button>
