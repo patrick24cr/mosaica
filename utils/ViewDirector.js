@@ -16,6 +16,7 @@ const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) 
   if (user) {
     return (
       <>
+        <title>Mosaica</title>
         {/* <NavBar /> */}
         <div className="container">
           <Component {...pageProps} />
