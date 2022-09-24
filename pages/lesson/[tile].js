@@ -305,7 +305,7 @@ export default function Lesson() {
       <div className="reportContainer displayNone" id="reportContainer">
         This score: {numberCorrect} <br />
         Last score: {scores[tile] ? scores[tile] : 'N/A'} <br />
-        Rounded-up average: {scores[tile] ? Math.ceil((parseInt(scores[tile], 10) + parseInt(numberCorrect, 10)) / 2) : Math.ceil((parseInt(numberCorrect, 10)) / 2)} <br /> <br />
+        Rounded-up average: {scores[tile] ? Math.ceil((parseInt(scores[tile], 10) + parseInt(numberCorrect, 10)) / 2) : numberCorrect} <br /> <br />
         <button type="button" className="genericLessonButton" onClick={() => calculateAndWriteScore()}>
           Write to database
         </button>
