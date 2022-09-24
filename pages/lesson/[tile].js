@@ -42,7 +42,7 @@ export default function Lesson() {
       const payload = {
         tile,
         uid: user.uid,
-        score: Math.ceil((parseInt(numberCorrect, 10)) / 2),
+        score: Math.ceil((parseInt(numberCorrect, 10))),
       };
       createScore(payload).then(() => router.push('/'));
     }
@@ -143,7 +143,7 @@ export default function Lesson() {
   useEffect(() => {
     // progress bar and timer
     // allowedTime must be 6 or greater for the progress bar to function properly
-    const allowedTime = 7;
+    const allowedTime = 12;
     const progressBar = document.getElementById('progressBar');
     let timeElapsed = 0;
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -305,7 +305,7 @@ export default function Lesson() {
       <div className="reportContainer displayNone" id="reportContainer">
         This score: {numberCorrect} <br />
         Last score: {scores[tile] ? scores[tile] : 'N/A'} <br />
-        Rounded-up average: {scores[tile] ? Math.ceil((parseInt(scores[tile], 10) + parseInt(numberCorrect, 10)) / 2) : Math.ceil((parseInt(numberCorrect, 10)) / 2)} <br /> <br />
+        Rounded-up average: {scores[tile] ? Math.ceil((parseInt(scores[tile], 10) + parseInt(numberCorrect, 10)) / 2) : numberCorrect} <br /> <br />
         <button type="button" className="genericLessonButton" onClick={() => calculateAndWriteScore()}>
           Write to database
         </button>
