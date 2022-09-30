@@ -101,6 +101,14 @@ a {
   background-color: #362983;
 }
 
+.selectedSyntaxItem {
+  background-color: #362983;
+  /* animation-name: colorAnimation3;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out; */
+}
+
 .verbContainer {
   grid-area: verbs;
 }
@@ -115,6 +123,14 @@ a {
 
 .highlightedVerbItem {
   background-color: #362983;
+}
+
+.selectedVerbItem {
+  background-color: #362983;
+  /* animation-name: colorAnimation3;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out; */
 }
 
 .lessonParameterButtons {
@@ -151,6 +167,7 @@ a {
   color: rgb(255, 255, 255);
   opacity: 0;
   transition: opacity .5s, visibility .5s;
+  cursor: pointer;
 }
 
 .highlightedScore {
@@ -224,6 +241,18 @@ a {
   }
   100% {
     background-color: #1c77ff;
+  }
+}
+
+@keyframes colorAnimation3 {
+  0% {
+    background-color: #362983;
+  }
+  50% {
+    background-color: #1E1554;
+  }
+  100% {
+    background-color: #362983;
   }
 }
 
