@@ -66,7 +66,7 @@ function GridInteractable({ scores, selected, setSelected }) {
     const verb = document.getElementById(`verb--${tileName[1]}`);
     let oldSyntax = {};
     let oldVerb = {};
-    if (selected) {
+    if (selected !== '') {
       oldSyntax = document.getElementById(`syntax--${selected[0]}`);
       oldVerb = document.getElementById(`verb--${selected[1]}`);
     }
