@@ -64,22 +64,16 @@ function GridInteractable({ scores, selected, setSelected }) {
     const tileName = e.target.id.split('--')[1];
     const syntax = document.getElementById(`syntax--${tileName[0]}`);
     const verb = document.getElementById(`verb--${tileName[1]}`);
-    let oldSyntax = {};
-    let oldVerb = {};
-    if (selected !== '') {
-      oldSyntax = document.getElementById(`syntax--${selected[0]}`);
-      oldVerb = document.getElementById(`verb--${selected[1]}`);
-    }
     if (tileName === selected) {
-      if (selected !== '') {
-        oldSyntax.classList.remove('selectedSyntaxItem');
-        oldVerb.classList.remove('selectedVerbItem');
+      if (selected !== '' && selected !== 'initial') {
+        document.getElementById(`syntax--${selected[0]}`).classList.remove('selectedSyntaxItem');
+        document.getElementById(`verb--${selected[1]}`).classList.remove('selectedVerbItem');
       }
       setSelected('');
     } else {
-      if (selected !== '') {
-        oldSyntax.classList.remove('selectedSyntaxItem');
-        oldVerb.classList.remove('selectedVerbItem');
+      if (selected !== '' && selected !== 'initial') {
+        document.getElementById(`syntax--${selected[0]}`).classList.remove('selectedSyntaxItem');
+        document.getElementById(`verb--${selected[1]}`).classList.remove('selectedVerbItem');
       }
       setSelected(tileName);
       syntax.classList.add('selectedSyntaxItem');
