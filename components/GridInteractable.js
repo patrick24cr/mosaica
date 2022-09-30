@@ -71,13 +71,13 @@ function GridInteractable({ scores, selected, setSelected }) {
       oldVerb = document.getElementById(`verb--${selected[1]}`);
     }
     if (tileName === selected) {
-      if (selected) {
+      if (selected !== '') {
         oldSyntax.classList.remove('selectedSyntaxItem');
         oldVerb.classList.remove('selectedVerbItem');
       }
       setSelected('');
     } else {
-      if (selected) {
+      if (selected !== '') {
         oldSyntax.classList.remove('selectedSyntaxItem');
         oldVerb.classList.remove('selectedVerbItem');
       }
