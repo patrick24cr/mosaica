@@ -57,7 +57,7 @@
     "english": "I must tell you it",
     "spanish": "Debo decírtelo",
     "responses": {
-      "0": ["Hablo", "Debo", "Hablas", "Debes"],
+      "0": ["Hablo", "Debo", "Hablas", "Debemos"],
       "1": ["decírlelo", "decírtelo", "decírmelo", "decírnoslo"]
     },
     "correct": {
