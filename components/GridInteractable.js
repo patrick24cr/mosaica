@@ -6,16 +6,16 @@ function GridInteractable({ scores, selected, setSelected }) {
   const rows = ['1', '2', '3', '4', '5'];
 
   const lessonCategories = {
-    1: 'verb level 1',
-    2: 'verb level 2',
-    3: 'verb level 3',
-    4: 'verb level 4',
-    5: 'verb level 5',
-    a: 'present tense',
-    b: 'past tense',
-    c: 'future tense',
-    d: 'conditional tense',
-    e: 'subjunctive tense',
+    1: 'Verb Level 1',
+    2: 'Verb Level 2',
+    3: 'Verb Level 3',
+    4: 'Verb Level 4',
+    5: 'Verb Level 5',
+    a: 'Present Tense',
+    b: 'Past Tense',
+    c: 'Future Tense',
+    d: 'Conditional Tense',
+    e: 'Subjunctive Tense',
   };
 
   const calculatedTileNames = [];
