@@ -69,7 +69,7 @@
     "english": "You must write it",
     "spanish": "Debes escribirlo",
     "responses": {
-      "0": ["Debe", "Debes", "Espero que", "Esperes que"],
+      "0": ["Debe", "Debes", "Tienes que", "Tiene que"],
       "1": ["escribirlo", "escribirte", "venderlo", "venderte"]
     },
     "correct": {
