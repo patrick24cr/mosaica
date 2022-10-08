@@ -30,18 +30,6 @@
     }
   },
   {
-    "english": "You must write it",
-    "spanish": "Debes escribirlo",
-    "responses": {
-      "0": ["Debe", "Debes", "Espero que", "Esperes que"],
-      "1": ["escribirlo", "escribirte", "venderlo", "venderte"]
-    },
-    "correct": {
-      "0":"1",
-      "1":"0"
-    }
-  },
-  {
     "english": "When do they arrive?",
     "spanish": "¿Cuándo llegan?",
     "responses": {
@@ -75,6 +63,18 @@
     "correct": {
       "0":"1",
       "1":"1"
+    }
+  },
+  {
+    "english": "You must write it",
+    "spanish": "Debes escribirlo",
+    "responses": {
+      "0": ["Debe", "Debes", "Espero que", "Esperes que"],
+      "1": ["escribirlo", "escribirte", "venderlo", "venderte"]
+    },
+    "correct": {
+      "0":"1",
+      "1":"0"
     }
   },
   {
