@@ -17,7 +17,7 @@
     "english": "She sells it to me",
     "spanish": "Ella me lo vende",
     "responses": {
-      "0": ["Ella", "El", "Nosotros"],
+      "0": ["Ella", "El", "Nosotros", "Yo"],
       "1": ["le", "la", "me", "te"],
       "2": ["las", "me", "lo", "le"],
       "3": ["vendo", "compra", "compro", "vende"]
