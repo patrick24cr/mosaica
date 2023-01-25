@@ -13,7 +13,7 @@ const checkUser = (uid) => new Promise((resolve, reject) => {
       Accept: 'application/json',
     },
   })
-    .then((resp) => resolve(resp.json(), console.log(resp)))
+    .then((resp) => resolve(resp.json()))
     .catch(reject);
 });
 

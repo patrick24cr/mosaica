@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import { useAuth } from './context/authContext';
 import Loading from '../components/Loading';
 import Signin from '../components/Signin';
+import RegisterForm from '../components/RegisterForm';
 // import NavBar from '../components/NavBar';
 
 const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) => {
-  const { user, userLoading } = useAuth();
+  const { user, userLoading, updateUser } = useAuth();
 
   // if user state is null, then show loader
   if (userLoading) {
@@ -18,9 +19,7 @@ const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) 
       <>
         <title>Mosaica</title>
         {/* <NavBar /> */}
-        <div className="container">
-          <Component {...pageProps} />
-        </div>
+        <div className="container">{'valid' in user ? <RegisterForm user={user} updateUser={updateUser} /> : <Component {...pageProps} />}</div>
       </>
     );
   }
