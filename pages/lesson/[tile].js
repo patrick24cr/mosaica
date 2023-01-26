@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import TopNavigation from '../../components/TopNavigation';
 import { useAuth } from '../../utils/context/authContext';
 import {
-  createScore, getScoreFirebaseKeysByUid, getScoresByUid, updateScoreByFirebaseKey,
+  createScore, getScoreFirebaseKeysByUid, getScoresById, updateScoreByFirebaseKey,
 } from '../../api/scores';
 import questions from '../../sampleData/questions.json';
 import createReport from '../../api/badQuestions';
@@ -28,9 +28,9 @@ export default function Lesson() {
 
   useEffect(() => {
     // get info that API call will need at end of lesson to write new score
-    getScoresByUid(user.uid).then(setScores);
-    getScoreFirebaseKeysByUid(user.uid).then(setFirebaseKeys);
-  }, [user.uid]);
+    getScoresById(user.id).then(setScores);
+    //getScoreFirebaseKeysByUid(user.uid).then(setFirebaseKeys);
+  }, [user.id]);
 
   const calculateAndWriteScore = () => {
     if (scores[tile]) {
