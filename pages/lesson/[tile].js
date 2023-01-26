@@ -29,8 +29,8 @@ export default function Lesson() {
   useEffect(() => {
     // get info that API call will need at end of lesson to write new score
     getScoresById(user.id).then(setScores);
-    //getScoreFirebaseKeysByUid(user.uid).then(setFirebaseKeys);
-  }, [user.id]);
+    getScoreFirebaseKeysByUid(user.uid).then(setFirebaseKeys);
+  }, [user.id, user.uid]);
 
   const calculateAndWriteScore = () => {
     if (scores[tile]) {
