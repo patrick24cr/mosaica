@@ -22,11 +22,11 @@ const updateScoreByFirebaseKey = (firebaseKey, payload) => new Promise((resolve,
 const getScoresById = (id) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/userTileScores?user=${id}`)
     .then((response) => {
-      console.warn(response);
       const tempScores = {};
       Object.values(response.data).forEach((element) => {
-        tempScores[element.tile] = element.score;
+        tempScores[element.tile.name.toLowerCase()] = element.score;
       });
+      console.warn(tempScores);
       resolve(tempScores);
     })
     .catch((error) => reject(error));
