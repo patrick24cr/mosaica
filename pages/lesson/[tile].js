@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react';
 import TopNavigation from '../../components/TopNavigation';
 import { useAuth } from '../../utils/context/authContext';
 import {
-  createScore, getScoreFirebaseKeysByUid, getScoresByUid, updateScoreByFirebaseKey,
+  createScore, getScoreByTileAndUser, getScoresById, updateScoreByFirebaseKey,
 } from '../../api/scores';
 import questions from '../../sampleData/questions.json';
 import createReport from '../../api/badQuestions';
+
+const tileNumbers = ['a1', 'a2', 'a3', 'a4', 'a5', 'b1', 'b2', 'b3', 'b4', 'b5', 'c1', 'c2', 'c3', 'c4', 'c5', 'd1', 'd2', 'd3', 'd4', 'd5', 'e1', 'e2', 'e3', 'e4', 'e5'];
 
 const initialState = {
   problemWithEnglish: false,
@@ -23,16 +25,21 @@ export default function Lesson() {
   const [numberCorrect, setNumberCorrect] = useState(0);
   const [scores, setScores] = useState({});
   const [firebaseKeys, setFirebaseKeys] = useState({});
+  const [primaryKey, setPrimaryKey] = useState({});
   const [hasUserResponded, setHasUserResponded] = useState(false);
   const [formInput, setFormInput] = useState(initialState);
 
   useEffect(() => {
     // get info that API call will need at end of lesson to write new score
-    getScoresByUid(user.uid).then(setScores);
-    getScoreFirebaseKeysByUid(user.uid).then(setFirebaseKeys);
-  }, [user.uid]);
+    getScoresById(user.id).then(setScores);
+    getScoreByTileAndUser(tileNumbers.indexOf(tile), user.id).then(setPrimaryKey);
+  }, [user.id, tile]);
 
   const calculateAndWriteScore = () => {
+    // delete these
+    setFirebaseKeys({});
+    console.warn(primaryKey);
+    // delete those
     if (scores[tile]) {
       const payload = {
         score: Math.ceil((parseInt(scores[tile], 10) + parseInt(numberCorrect, 10)) / 2),
