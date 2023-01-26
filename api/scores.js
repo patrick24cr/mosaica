@@ -19,6 +19,19 @@ const updateScoreByFirebaseKey = (firebaseKey, payload) => new Promise((resolve,
     .catch((error) => reject(error));
 });
 
+const getScoresById = (id) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/userTileScores?user=${id}`)
+    .then((response) => {
+      console.warn(response);
+      const tempScores = {};
+      Object.values(response.data).forEach((element) => {
+        tempScores[element.tile] = element.score;
+      });
+      resolve(tempScores);
+    })
+    .catch((error) => reject(error));
+});
+
 const getScoresByUid = (uid) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/scores.json?orderBy="uid"&equalTo="${uid}"`)
     .then((response) => {
@@ -65,6 +78,7 @@ const deleteAllScoresByUid = (uid) => new Promise((resolve, reject) => {
 export {
   createScore,
   updateScoreByFirebaseKey,
+  getScoresById,
   getScoresByUid,
   getScoreFirebaseKeysByUid,
   deleteScoreByFirebaseKey,

@@ -24,7 +24,7 @@ const AuthProvider = (props) => {
   // an object/value = user is logged in
 
   const updateUser = useMemo(
-    () => (uid) => checkUser(uid).then((userInfo) => {
+    () => (userObj) => checkUser(userObj).then((userInfo) => {
       setUser({ fbUser: oAuthUser, ...userInfo });
     }),
     [oAuthUser],

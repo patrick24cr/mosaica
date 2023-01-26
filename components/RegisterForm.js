@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types';
 import { registerUser } from '../utils/auth'; // Update with path to registerUser
 
-function RegisterForm({ user, updateUser }) {
-  const userData = {
-    uid: user.uid,
-  };
+function RegisterForm({ user, updateUser, onUpdate }) {
   const handleClick = () => {
-    registerUser(userData).then(() => updateUser(userData.uid));
+    console.warn(user);
+    registerUser(user).then(() => {
+      updateUser(user).then(() => onUpdate);
+    });
   };
   return (
     <div className="profileInfo">
       <h1>Welcome to Mosaica</h1>
       <button type="button" className="button1" onClick={handleClick}>
-        Create User?
+        Create New Mosaic?
       </button>
     </div>
   );
@@ -20,9 +20,11 @@ function RegisterForm({ user, updateUser }) {
 
 RegisterForm.propTypes = {
   user: PropTypes.shape({
-    uid: PropTypes.string.isRequired,
+    uid: PropTypes.string,
+    valid: PropTypes.bool,
   }).isRequired,
   updateUser: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
 
 export default RegisterForm;
