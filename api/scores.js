@@ -19,6 +19,12 @@ const updateScoreByFirebaseKey = (firebaseKey, payload) => new Promise((resolve,
     .catch((error) => reject(error));
 });
 
+const updateScoreByPrimaryKey = (primaryKey, payload) => new Promise((resolve, reject) => {
+  axios.put(`${dbUrl}/userTileScores/${primaryKey}`, payload)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
 const getScoreByTileAndUser = (tile, userId) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/userTileScores?user=${userId}&tile=${tile}`)
     .then((response) => resolve(response.data[0]))
@@ -32,7 +38,6 @@ const getScoresById = (id) => new Promise((resolve, reject) => {
       Object.values(response.data).forEach((element) => {
         tempScores[element.tile.name.toLowerCase()] = element.score;
       });
-      console.warn(tempScores);
       resolve(tempScores);
     })
     .catch((error) => reject(error));
@@ -81,13 +86,21 @@ const deleteAllScoresByUid = (uid) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const deleteAllScoresById = (id) => new Promise((resolve, reject) => {
+  axios.delete(`${dbUrl}/userTileScores/${id}`)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
 export {
   createScore,
   updateScoreByFirebaseKey,
+  updateScoreByPrimaryKey,
   getScoreByTileAndUser,
   getScoresById,
   getScoresByUid,
   getScoreFirebaseKeysByUid,
   deleteScoreByFirebaseKey,
   deleteAllScoresByUid,
+  deleteAllScoresById,
 };
