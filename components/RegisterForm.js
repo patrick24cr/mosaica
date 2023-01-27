@@ -3,7 +3,6 @@ import { registerUser } from '../utils/auth'; // Update with path to registerUse
 
 function RegisterForm({ user, updateUser, onUpdate }) {
   const handleClick = () => {
-    console.warn(user);
     registerUser(user).then(() => {
       updateUser(user).then(() => onUpdate);
     });

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import TopNavigation from '../../components/TopNavigation';
 import { useAuth } from '../../utils/context/authContext';
 import {
-  createScore, getScoreByTileAndUser, getScoresById, updateScoreByFirebaseKey,
+  createScore, getScoreByTileAndUser, getScoresById, updateScoreByPrimaryKey,
 } from '../../api/scores';
 import questions from '../../sampleData/questions.json';
 import createReport from '../../api/badQuestions';
@@ -24,7 +24,6 @@ export default function Lesson() {
   const selectedResponses = {};
   const [numberCorrect, setNumberCorrect] = useState(0);
   const [scores, setScores] = useState({});
-  const [firebaseKeys, setFirebaseKeys] = useState({});
   const [primaryKey, setPrimaryKey] = useState({});
   const [hasUserResponded, setHasUserResponded] = useState(false);
   const [formInput, setFormInput] = useState(initialState);
@@ -32,19 +31,15 @@ export default function Lesson() {
   useEffect(() => {
     // get info that API call will need at end of lesson to write new score
     getScoresById(user.id).then(setScores);
-    getScoreByTileAndUser(tileNumbers.indexOf(tile), user.id).then(setPrimaryKey);
+    getScoreByTileAndUser((tileNumbers.indexOf(tile) + 1), user.id).then(setPrimaryKey);
   }, [user.id, tile]);
 
   const calculateAndWriteScore = () => {
-    // delete these
-    setFirebaseKeys({});
-    console.warn(primaryKey);
-    // delete those
     if (scores[tile]) {
       const payload = {
         score: Math.ceil((parseInt(scores[tile], 10) + parseInt(numberCorrect, 10)) / 2),
       };
-      updateScoreByFirebaseKey(firebaseKeys[tile], payload).then(() => router.push('/'));
+      updateScoreByPrimaryKey(primaryKey.id, payload).then(() => router.push('/'));
     } else {
       const payload = {
         tile,
