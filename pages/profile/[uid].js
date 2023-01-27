@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import TopNavigation from '../../components/TopNavigation';
-import { deleteAllScoresById, deleteAllScoresByUid } from '../../api/scores';
+import { deleteAllScoresById } from '../../api/scores';
 import deleteUser from '../../api/user';
 import { useAuth } from '../../utils/context/authContext';
 import { signOut } from '../../utils/auth';
