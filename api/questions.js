@@ -4,10 +4,9 @@ import { clientCredentials } from '../utils/client';
 const dbUrl = clientCredentials.databaseURL;
 
 const getQuestionsByTile = (tile) => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/questions`)
+  axios.get(`${dbUrl}/questions?tile=${tile}`)
     .then((response) => {
       // lots of formatting to render the server response to my old client side JSON pattern, because the button generation was so dependent on that pattern
-      console.warn(tile);
       const formattedResponse = [{}];
       response.data.forEach((element) => {
         let a1 = null;
@@ -51,6 +50,7 @@ const getQuestionsByTile = (tile) => new Promise((resolve, reject) => {
           }
         });
         formattedResponse.push({
+          id: element.id,
           english: element.english,
           spanish: element.spanish,
           responses: packagedResponses,
