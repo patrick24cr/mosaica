@@ -7,7 +7,8 @@ const getQuestionsByTile = (tile) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/questions`)
     .then((response) => {
       // lots of formatting to render the server response to my old client side JSON pattern, because the button generation was so dependent on that pattern
-      let formattedResponse = [{}];
+      console.warn(tile);
+      const formattedResponse = [{}];
       response.data.forEach((element) => {
         let a1 = null;
         let a2 = null;
@@ -38,9 +39,9 @@ const getQuestionsByTile = (tile) => new Promise((resolve, reject) => {
           a4.splice(a4Correct, 0, element.aspect4.optionCorrect);
         }
         const responseColumns = [a1, a2, a3, a4];
-        const responseCorrect = [a1Correct, a2Correct, a3Correct, a4Correct];
-        let packagedResponses = {};
-        let packagedCorrect = {};
+        const responseCorrect = [a1Correct.toString(), a2Correct.toString(), a3Correct.toString(), a4Correct.toString()];
+        const packagedResponses = {};
+        const packagedCorrect = {};
         let columnNumber = 0;
         responseColumns.forEach((column) => {
           if (column != null) {
@@ -56,6 +57,7 @@ const getQuestionsByTile = (tile) => new Promise((resolve, reject) => {
           correct: packagedCorrect,
         });
       });
+      formattedResponse.shift();
       console.warn(formattedResponse);
       resolve(formattedResponse);
     })
