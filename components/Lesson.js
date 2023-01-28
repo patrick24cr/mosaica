@@ -249,7 +249,8 @@ export default function Lesson({ questions }) {
     setFormInput((prevState) => ({
       ...prevState,
       [name]: value,
-      question: questions[questionNumber],
+      question: questions[questionNumber].id,
+      user: user.id,
     }));
   };
 
@@ -321,8 +322,9 @@ export default function Lesson({ questions }) {
 
 Lesson.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
     english: PropTypes.string,
-    spanish: PropTypes.bool,
+    spanish: PropTypes.string,
     responses: PropTypes.shape({
     }),
     correct: PropTypes.shape({

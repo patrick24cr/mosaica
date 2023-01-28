@@ -50,6 +50,7 @@ const getQuestionsByTile = (tile) => new Promise((resolve, reject) => {
           }
         });
         formattedResponse.push({
+          id: element.id,
           english: element.english,
           spanish: element.spanish,
           responses: packagedResponses,
