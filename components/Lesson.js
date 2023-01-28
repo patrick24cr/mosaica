@@ -34,6 +34,7 @@ export default function Lesson({ questions }) {
     // getQuestionsByTile(tile).then(setQuestions);
     getScoresById(user.id).then(setScores);
     getScoreByTileAndUser((tileNumbers.indexOf(tile) + 1), user.id).then(setPrimaryKey);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.id, tile]);
 
   const calculateAndWriteScore = () => {
