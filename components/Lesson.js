@@ -1,23 +1,23 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import TopNavigation from '../../components/TopNavigation';
-import { useAuth } from '../../utils/context/authContext';
+import PropTypes from 'prop-types';
+import TopNavigation from './TopNavigation';
+import { useAuth } from '../utils/context/authContext';
 import {
   createScore, getScoreByTileAndUser, getScoresById, updateScoreByPrimaryKey,
-} from '../../api/scores';
+} from '../api/scores';
 // import questions from '../../sampleData/questions.json';
-import createReport from '../../api/badQuestions';
-import getQuestionsByTile from '../../api/questions';
+import createReport from '../api/badQuestions';
+// import getQuestionsByTile from '../api/questions';
 
-const tileNumbers = ['a1', 'a2', 'a3', 'a4', 'a5', 'b1', 'b2', 'b3', 'b4', 'b5', 'c1', 'c2', 'c3', 'c4', 'c5', 'd1', 'd2', 'd3', 'd4', 'd5', 'e1', 'e2', 'e3', 'e4', 'e5'];
+export default function Lesson({ questions }) {
+  const tileNumbers = ['a1', 'a2', 'a3', 'a4', 'a5', 'b1', 'b2', 'b3', 'b4', 'b5', 'c1', 'c2', 'c3', 'c4', 'c5', 'd1', 'd2', 'd3', 'd4', 'd5', 'e1', 'e2', 'e3', 'e4', 'e5'];
 
-const initialState = {
-  problemWithEnglish: false,
-  problemWithSpanish: false,
-  problemDescription: '',
-};
-
-export default function Lesson() {
+  const initialState = {
+    problemWithEnglish: false,
+    problemWithSpanish: false,
+    problemDescription: '',
+  };
   const { user } = useAuth();
   const router = useRouter();
   const { tile } = router.query;
@@ -28,10 +28,10 @@ export default function Lesson() {
   const [primaryKey, setPrimaryKey] = useState({});
   const [hasUserResponded, setHasUserResponded] = useState(false);
   const [formInput, setFormInput] = useState(initialState);
-  const [questions, setQuestions] = useState(null);
+  // const [questions, setQuestions] = useState(null);
 
   useEffect(() => {
-    getQuestionsByTile(tile).then(setQuestions);
+    // getQuestionsByTile(tile).then(setQuestions);
     getScoresById(user.id).then(setScores);
     getScoreByTileAndUser((tileNumbers.indexOf(tile) + 1), user.id).then(setPrimaryKey);
   }, [user.id, tile]);
@@ -72,7 +72,7 @@ export default function Lesson() {
       document.getElementById('afterQuestionButtons').classList.remove('displayNone');
       setTimeout(document.getElementById('quizContainer').classList.remove('quizContainerFaded'), 500);
     };
-    // these visual changes are on CSS transitions and need to be started early
+      // these visual changes are on CSS transitions and need to be started early
     document.getElementById('progressBar').classList = 'progressBar';
     document.getElementById('progressBar').classList.add('progressBar00');
     document.getElementById('constructedSpanish').classList.add('hiddenLessonElement');
@@ -106,14 +106,14 @@ export default function Lesson() {
   const checkAnswerDisplayCorrection = () => {
     const isCorrect = Object.keys(questions[questionNumber].correct).every(
       (key) => Object.prototype.hasOwnProperty.call(selectedResponses, key)
-                  && questions[questionNumber].correct[key] === selectedResponses[key],
+                    && questions[questionNumber].correct[key] === selectedResponses[key],
     );
 
     const wrongResponses = [];
     Object.keys(questions[questionNumber].correct).forEach(
       (key) => {
         if (!(Object.prototype.hasOwnProperty.call(selectedResponses, key)
-        && questions[questionNumber].correct[key] === selectedResponses[key])) {
+          && questions[questionNumber].correct[key] === selectedResponses[key])) {
           wrongResponses.push(`${key}--${selectedResponses[key]}`);
         }
       },
@@ -207,11 +207,11 @@ export default function Lesson() {
           progressBar.classList.add('progressBar00');
           break;
         default:
-          // code block
+            // code block
       }
     }, 500);
     return () => clearInterval(responseTimer);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questionNumber, hasUserResponded]);
 
   const showBadQuestionForm = () => {
@@ -317,3 +317,14 @@ export default function Lesson() {
     </div>
   );
 }
+
+Lesson.propTypes = {
+  questions: PropTypes.arrayOf(PropTypes.shape({
+    english: PropTypes.string,
+    spanish: PropTypes.bool,
+    responses: PropTypes.shape({
+    }),
+    correct: PropTypes.shape({
+    }),
+  })).isRequired,
+};
